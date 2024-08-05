@@ -1,0 +1,1120 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffe76a4a58c, pid=4460, tid=16308
+#
+# JRE version: Java(TM) SE Runtime Environment (22.0.1+8) (build 22.0.1+8-16)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (22.0.1+8-16, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# Problematic frame:
+# V  [jvm.dll+0x36a58c]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dapplication.home=C:\Program Files\Java\jdk-22 --add-modules=ALL-DEFAULT -Xms8m -Djdk.module.main=jdk.compiler jdk.compiler/com.sun.tools.javac.Main -cp lib/activation-1.1.1.jar;lib/antlr-2.7.7 (1).jar;lib/byte-buddy-1.10.22.jar;lib/classmate-1.5.1.jar;lib/dom4j-1.6.1 (1).jar;lib/hibernate-commons-annotations-5.1.2.Final.jar;lib/hibernate-core-5.6.0.Final.jar;lib/hibernate-jpa-2.1-api-1.0.2.Final.jar;lib/istack-commons-runtime-3.0.12.jar;lib/javax.persistence-api-2.2.jar;lib/jaxb-api-2.3.1.jar;lib/jaxb-impl-2.3.1.jar;lib/jboss-logging-3.3.2.Final (1).jar;lib/jboss-transaction-api_1.2_spec-1.1.1.Final (1).jar;lib/mysql-connector-j-8.3.0 (1).jar;lib/mysql-connector.jar; com/certificate/controller/*.java com/certificate/service/*.java com/certificate/dao/*.java com/model/*.java com/department/service/*.java com/department/dao/*.java com/department/controller/*.java com/employee/dao/*.java com/employee/service/*.java com/employee/controller/*.java com/employeeException/*.java com/util/*.java com/connectionManager/*.java com/bankDetail/service/*.java com/bankDetail/dao/*.java
+
+Host: Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz, 8 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.4717)
+Time: Mon Aug  5 10:58:15 2024 India Standard Time elapsed time: 1.270544 seconds (0d 0h 0m 1s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000020cf2e68b50):  JavaThread "main"             [_thread_in_Java, id=16308, stack(0x000000501b600000,0x000000501b700000) (1024K)]
+
+Stack: [0x000000501b600000,0x000000501b700000],  sp=0x000000501b6fc890,  free space=1010k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x36a58c]  (no source info available)
+V  [jvm.dll+0x74721b]  (no source info available)
+C  0x0000020c87b8239f  (no source info available)
+
+The last pc belongs to nmethod (printed below).
+
+siginfo: EXCEPTION_ACCESS_VIOLATION (0xc0000005), reading address 0x00000214f50b8158
+
+
+Registers:
+RAX=0x0000020cdba8f978, RBX=0x0000020cf508c0f0, RCX=0x0000020cf50b8180, RDX=0x00000000fffffffb
+RSP=0x000000501b6fc890, RBP=0x0000000701e20f68, RSI=0x0000000701431f40, RDI=0x0000020cdba8f428
+R8 =0x000007fffffffffb, R9 =0x0000000000000107, R10=0x00000000000041ed, R11=0x0000000000000000
+R12=0x0000000000000000, R13=0x00000000e0474e43, R14=0x0000020cf2e68b78, R15=0x0000020cdba8de80
+RIP=0x00007ffe76a4a58c, EFLAGS=0x0000000000010a02
+
+
+Register to memory mapping:
+
+RAX=0x0000020cdba8f978 points into unknown readable memory: 0x00000007020d34b0 | b0 34 0d 02 07 00 00 00
+RBX=0x0000020cf508c0f0 points into unknown readable memory: 0x00007ffe770ced40 | 40 ed 0c 77 fe 7f 00 00
+RCX=0x0000020cf50b8180 points into unknown readable memory: 0x0000020cf514b1e0 | e0 b1 14 f5 0c 02 00 00
+RDX=0x00000000fffffffb is an unknown value
+RSP=0x000000501b6fc890 is pointing into the stack for thread: 0x0000020cf2e68b50
+RBP=0x0000000701e20f68 is an oop: com.sun.tools.javac.util.List$1 
+{0x0000000701e20f68} - klass: 'com/sun/tools/javac/util/List$1'
+ - ---- fields (total size 3 words):
+ - public 'head' 'Ljava/lang/Object;' @12  null (0x00000000)
+ - public 'tail' 'Lcom/sun/tools/javac/util/List;' @16  null (0x00000000)
+RSI=0x0000000701431f40 is an unknown value
+RDI=0x0000020cdba8f428 points into unknown readable memory: 0x0000000701431f40 | 40 1f 43 01 07 00 00 00
+R8 =0x000007fffffffffb is an unknown value
+R9 =0x0000000000000107 is an unknown value
+R10=0x00000000000041ed is an unknown value
+R11=0x0 is null
+R12=0x0 is null
+R13=3762769475 is a compressed pointer to object: com.sun.tools.javac.util.StringNameTable$NameImpl 
+{0x00000007023a7218} - klass: 'com/sun/tools/javac/util/StringNameTable$NameImpl'
+ - ---- fields (total size 3 words):
+ - public final 'table' 'Lcom/sun/tools/javac/util/Name$Table;' @12  a 'com/sun/tools/javac/util/StringNameTable'{0x0000000701f33280} (0xe03e6650)
+ - private final 'string' 'Ljava/lang/String;' @16  "arg0"{0x00000007023a7230} (0xe0474e46)
+R14=0x0000020cf2e68b78 points into unknown readable memory: 0x0000000000000000 | 00 00 00 00 00 00 00 00
+R15=0x0000020cdba8de80 points into unknown readable memory: 0x0000000703444878 | 78 48 44 03 07 00 00 00
+
+Top of Stack: (sp=0x000000501b6fc890)
+0x000000501b6fc890:   0000000701eb9c60 0000000703444d00
+0x000000501b6fc8a0:   0000000701f33298 0000000701f35680
+0x000000501b6fc8b0:   0000020cf2e68b50 00007ffe76e2721b
+0x000000501b6fc8c0:   0000020cf2e68b78 0000020cf5097530
+0x000000501b6fc8d0:   0000000703444ea0 0000000703444e60
+0x000000501b6fc8e0:   0000000000000000 0000020c87b8239f
+0x000000501b6fc8f0:   0000000000000000 0000000703444e60
+0x000000501b6fc900:   00000000e06889d4 00000007023a7218
+0x000000501b6fc910:   0000000703444d40 0000000703444c88
+0x000000501b6fc920:   0000000703444c68 0000000703444c50
+0x000000501b6fc930:   0000000000000000 0000000703444d40
+0x000000501b6fc940:   000000501b6fce68 0000020c8035dd94
+0x000000501b6fc950:   0000000703444d40 0000020cd65f4da8
+0x000000501b6fc960:   0000000000000000 0000000701f1bc08
+0x000000501b6fc970:   0000020cd65dc610 0000000000000000
+0x000000501b6fc980:   000000501b6fc998 000000501b6fc9f0
+0x000000501b6fc990:   0000020c875388c0 00000007034448b8
+0x000000501b6fc9a0:   0000000701f35680 fffffffffffffff7
+0x000000501b6fc9b0:   0000020cd68af955 0000000000000004
+0x000000501b6fc9c0:   000000501b6fce68 0000020c80336284
+0x000000501b6fc9d0:   0000000701f96ae0 0000020cd68af988
+0x000000501b6fc9e0:   0000000000000000 000000501b6fca20
+0x000000501b6fc9f0:   000000501b6fce68 0000020c8034a1ec
+0x000000501b6fca00:   0000000700000006 00000007034448b8
+0x000000501b6fca10:   0000000701f35680 00000007034448b8
+0x000000501b6fca20:   0000000703442000 0000000000000000
+0x000000501b6fca30:   000000501b6fce68 0000020c80330fbc
+0x000000501b6fca40:   0000000000000000 0000000703444d00
+0x000000501b6fca50:   0000000703444d40 0000000703444d60
+0x000000501b6fca60:   0000000000000000 0000000701fbfe98
+0x000000501b6fca70:   0000000703444e60 000000070343a630
+0x000000501b6fca80:   0000000703444890 0000000701f35680 
+
+Instructions: (pc=0x00007ffe76a4a58c)
+0x00007ffe76a4a48c:   50 e8 5e 2b fe ff 48 8b 5c 24 40 ff c7 83 ff 05
+0x00007ffe76a4a49c:   0f 85 0e ff ff ff 48 8b 8c 24 c8 00 00 00 48 33
+0x00007ffe76a4a4ac:   cc e8 9e af 5a 00 48 81 c4 d8 00 00 00 41 5f 41
+0x00007ffe76a4a4bc:   5e 41 5d 41 5c 5f 5e 5d 5b c3 cc cc cc cc cc cc
+0x00007ffe76a4a4cc:   cc cc cc cc 40 53 48 83 ec 20 48 8b d9 e8 72 c9
+0x00007ffe76a4a4dc:   3d 00 48 8d 05 9b e1 68 00 48 89 03 48 8b c3 48
+0x00007ffe76a4a4ec:   83 c4 20 5b c3 cc cc cc cc cc cc cc cc cc cc cc
+0x00007ffe76a4a4fc:   cc cc cc cc 48 89 5c 24 18 4c 89 74 24 20 41 57
+0x00007ffe76a4a50c:   48 83 ec 20 4c 8b 7a 08 4c 8b f2 48 8b 1d b2 57
+0x00007ffe76a4a51c:   92 00 4d 85 ff 0f 84 66 01 00 00 48 8b 02 48 8b
+0x00007ffe76a4a52c:   ca 48 c1 e8 03 48 89 7c 24 38 49 8d 3c c7 e8 81
+0x00007ffe76a4a53c:   af 3b 00 49 8d 04 c7 48 3b f8 0f 83 32 01 00 00
+0x00007ffe76a4a54c:   48 89 74 24 30 0f 1f 40 00 66 66 66 0f 1f 84 00
+0x00007ffe76a4a55c:   00 00 00 00 8b 8b 18 02 00 00 48 8b 37 48 8b 93
+0x00007ffe76a4a56c:   10 02 00 00 4c 8b c6 48 d3 e2 8b 0d 74 94 8d 00
+0x00007ffe76a4a57c:   4c 2b c2 49 d3 e8 48 8b 8b f8 01 00 00 41 8b d0
+0x00007ffe76a4a58c:   48 8b 0c d1 48 8b 49 60 48 3b f1 0f 83 cf 00 00
+0x00007ffe76a4a59c:   00 4c 8b 83 28 05 00 00 48 8b d6 49 2b 50 18 41
+0x00007ffe76a4a5ac:   8b 48 28 4d 8b 40 30 48 c1 ea 03 48 d3 ea 0f b6
+0x00007ffe76a4a5bc:   ca 4c 8b ca 80 e1 3f 49 c1 e9 06 0f b6 d1 4b 8b
+0x00007ffe76a4a5cc:   0c c8 48 0f a3 d1 0f 82 94 00 00 00 48 83 e8 08
+0x00007ffe76a4a5dc:   48 3b f8 0f 83 87 00 00 00 66 66 66 0f 1f 84 00
+0x00007ffe76a4a5ec:   00 00 00 00 8b 8b 18 02 00 00 4c 8b 10 48 8b 93
+0x00007ffe76a4a5fc:   10 02 00 00 4d 8b c2 48 d3 e2 8b 0d e4 93 8d 00
+0x00007ffe76a4a60c:   4c 2b c2 49 d3 e8 48 8b 8b f8 01 00 00 41 8b d0
+0x00007ffe76a4a61c:   48 8b 0c d1 48 8b 49 60 4c 3b d1 73 40 4c 8b 83
+0x00007ffe76a4a62c:   28 05 00 00 4d 2b 50 18 41 8b 48 28 4d 8b 40 30
+0x00007ffe76a4a63c:   49 c1 ea 03 49 d3 ea 41 0f b6 ca 4d 8b ca 80 e1
+0x00007ffe76a4a64c:   3f 49 c1 e9 06 0f b6 d1 4b 8b 0c c8 48 0f a3 d1
+0x00007ffe76a4a65c:   72 0b 48 83 e8 08 48 3b f8 72 89 eb 03 48 89 30
+0x00007ffe76a4a66c:   48 83 c7 08 48 3b f8 0f 82 e7 fe ff ff 48 8b 74
+0x00007ffe76a4a67c:   24 30 48 8b 7c 24 38 49 2b c7 48 83 e0 f8 49 89 
+
+
+Stack slot to memory mapping:
+
+stack at sp + 0 slots: 0x0000000701eb9c60 is an oop: java.lang.String 
+{0x0000000701eb9c60} - klass: 'java/lang/String'
+ - string: "arg"
+ - ---- fields (total size 3 words):
+ - private 'hash' 'I' @12  0 (0x00000000)
+ - private final 'coder' 'B' @16  0 (0x00)
+ - private 'hashIsZero' 'Z' @17  false (0x00)
+ - injected 'flags' 'B' @18  0 (0x00)
+ - private final 'value' '[B' @20  [B{0x0000000701eb9c78} (0xe03d738f)
+stack at sp + 1 slots: 0x0000000703444d00 is an oop: java.util.HashSet 
+{0x0000000703444d00} - klass: 'java/util/HashSet'
+ - ---- fields (total size 2 words):
+ - transient 'map' 'Ljava/util/HashMap;' @12  a 'java/util/HashMap'{0x0000000703444d10} (0xe06889a2)
+stack at sp + 2 slots: 0x0000000701f33298 is an oop: com.sun.tools.javac.util.Names 
+{0x0000000701f33298} - klass: 'com/sun/tools/javac/util/Names'
+ - ---- fields (total size 77 words):
+ - public final 'asterisk' 'Lcom/sun/tools/javac/util/Name;' @12  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33500} (0xe03e66a0)
+ - public final 'comma' 'Lcom/sun/tools/javac/util/Name;' @16  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33518} (0xe03e66a3)
+ - public final 'empty' 'Lcom/sun/tools/javac/util/Name;' @20  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33530} (0xe03e66a6)
+ - public final 'hyphen' 'Lcom/sun/tools/javac/util/Name;' @24  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33548} (0xe03e66a9)
+ - public final 'one' 'Lcom/sun/tools/javac/util/Name;' @28  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33560} (0xe03e66ac)
+ - public final 'slash' 'Lcom/sun/tools/javac/util/Name;' @32  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33578} (0xe03e66af)
+ - public final '_class' 'Lcom/sun/tools/javac/util/Name;' @36  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33590} (0xe03e66b2)
+ - public final '_super' 'Lcom/sun/tools/javac/util/Name;' @40  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f335a8} (0xe03e66b5)
+ - public final '_this' 'Lcom/sun/tools/javac/util/Name;' @44  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f335c0} (0xe03e66b8)
+ - public final 'var' 'Lcom/sun/tools/javac/util/Name;' @48  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f335d8} (0xe03e66bb)
+ - public final 'exports' 'Lcom/sun/tools/javac/util/Name;' @52  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f335f0} (0xe03e66be)
+ - public final 'opens' 'Lcom/sun/tools/javac/util/Name;' @56  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33608} (0xe03e66c1)
+ - public final 'module' 'Lcom/sun/tools/javac/util/Name;' @60  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33620} (0xe03e66c4)
+ - public final 'provides' 'Lcom/sun/tools/javac/util/Name;' @64  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33638} (0xe03e66c7)
+ - public final 'requires' 'Lcom/sun/tools/javac/util/Name;' @68  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33650} (0xe03e66ca)
+ - public final 'to' 'Lcom/sun/tools/javac/util/Name;' @72  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33668} (0xe03e66cd)
+ - public final 'transitive' 'Lcom/sun/tools/javac/util/Name;' @76  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33680} (0xe03e66d0)
+ - public final 'uses' 'Lcom/sun/tools/javac/util/Name;' @80  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33698} (0xe03e66d3)
+ - public final 'open' 'Lcom/sun/tools/javac/util/Name;' @84  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f336b0} (0xe03e66d6)
+ - public final 'underscore' 'Lcom/sun/tools/javac/util/Name;' @88  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f336c8} (0xe03e66d9)
+ - public final 'when' 'Lcom/sun/tools/javac/util/Name;' @92  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f336e0} (0xe03e66dc)
+ - public final 'with' 'Lcom/sun/tools/javac/util/Name;' @96  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f336f8} (0xe03e66df)
+ - public final 'yield' 'Lcom/sun/tools/javac/util/Name;' @100  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33710} (0xe03e66e2)
+ - public final '_name' 'Lcom/sun/tools/javac/util/Name;' @104  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33728} (0xe03e66e5)
+ - public final 'addSuppressed' 'Lcom/sun/tools/javac/util/Name;' @108  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33740} (0xe03e66e8)
+ - public final 'any' 'Lcom/sun/tools/javac/util/Name;' @112  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33758} (0xe03e66eb)
+ - public final 'append' 'Lcom/sun/tools/javac/util/Name;' @116  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33770} (0xe03e66ee)
+ - public final 'clinit' 'Lcom/sun/tools/javac/util/Name;' @120  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33788} (0xe03e66f1)
+ - public final 'clone' 'Lcom/sun/tools/javac/util/Name;' @124  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f337a0} (0xe03e66f4)
+ - public final 'close' 'Lcom/sun/tools/javac/util/Name;' @128  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f337b8} (0xe03e66f7)
+ - public final 'deserializeLambda' 'Lcom/sun/tools/javac/util/Name;' @132  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f337d0} (0xe03e66fa)
+ - public final 'desiredAssertionStatus' 'Lcom/sun/tools/javac/util/Name;' @136  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f337e8} (0xe03e66fd)
+ - public final 'equals' 'Lcom/sun/tools/javac/util/Name;' @140  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33800} (0xe03e6700)
+ - public final 'error' 'Lcom/sun/tools/javac/util/Name;' @144  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33818} (0xe03e6703)
+ - public final 'finalize' 'Lcom/sun/tools/javac/util/Name;' @148  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33830} (0xe03e6706)
+ - public final 'forRemoval' 'Lcom/sun/tools/javac/util/Name;' @152  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33848} (0xe03e6709)
+ - public final 'reflective' 'Lcom/sun/tools/javac/util/Name;' @156  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33860} (0xe03e670c)
+ - public final 'getClass' 'Lcom/sun/tools/javac/util/Name;' @160  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33878} (0xe03e670f)
+ - public final 'hasNext' 'Lcom/sun/tools/javac/util/Name;' @164  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33890} (0xe03e6712)
+ - public final 'hashCode' 'Lcom/sun/tools/javac/util/Name;' @168  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f338a8} (0xe03e6715)
+ - public final 'init' 'Lcom/sun/tools/javac/util/Name;' @172  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f338c0} (0xe03e6718)
+ - public final 'invoke' 'Lcom/sun/tools/javac/util/Name;' @176  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f338d8} (0xe03e671b)
+ - public final 'iterator' 'Lcom/sun/tools/javac/util/Name;' @180  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f338f0} (0xe03e671e)
+ - public final 'length' 'Lcom/sun/tools/javac/util/Name;' @184  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33908} (0xe03e6721)
+ - public final 'next' 'Lcom/sun/tools/javac/util/Name;' @188  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33920} (0xe03e6724)
+ - public final 'of' 'Lcom/sun/tools/javac/util/Name;' @192  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33938} (0xe03e6727)
+ - public final 'ordinal' 'Lcom/sun/tools/javac/util/Name;' @196  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33950} (0xe03e672a)
+ - public final 'provider' 'Lcom/sun/tools/javac/util/Name;' @200  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33968} (0xe03e672d)
+ - public final 'serialVersionUID' 'Lcom/sun/tools/javac/util/Name;' @204  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33980} (0xe03e6730)
+ - public final 'toString' 'Lcom/sun/tools/javac/util/Name;' @208  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33998} (0xe03e6733)
+ - public final 'value' 'Lcom/sun/tools/javac/util/Name;' @212  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f339b0} (0xe03e6736)
+ - public final 'valueOf' 'Lcom/sun/tools/javac/util/Name;' @216  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f339c8} (0xe03e6739)
+ - public final 'values' 'Lcom/sun/tools/javac/util/Name;' @220  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f339e0} (0xe03e673c)
+ - public final 'readResolve' 'Lcom/sun/tools/javac/util/Name;' @224  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f339f8} (0xe03e673f)
+ - public final 'readObject' 'Lcom/sun/tools/javac/util/Name;' @228  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33a10} (0xe03e6742)
+ - public final 'java_io_Serializable' 'Lcom/sun/tools/javac/util/Name;' @232  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33a28} (0xe03e6745)
+ - public final 'java_lang_Class' 'Lcom/sun/tools/javac/util/Name;' @236  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33a40} (0xe03e6748)
+ - public final 'java_lang_Cloneable' 'Lcom/sun/tools/javac/util/Name;' @240  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33a58} (0xe03e674b)
+ - public final 'java_lang_Enum' 'Lcom/sun/tools/javac/util/Name;' @244  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33a70} (0xe03e674e)
+ - public final 'java_lang_Object' 'Lcom/sun/tools/javac/util/Name;' @248  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33a88} (0xe03e6751)
+ - public final 'Array' 'Lcom/sun/tools/javac/util/Name;' @252  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33aa0} (0xe03e6754)
+ - public final 'Bound' 'Lcom/sun/tools/javac/util/Name;' @256  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33ab8} (0xe03e6757)
+ - public final 'Method' 'Lcom/sun/tools/javac/util/Name;' @260  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33ad0} (0xe03e675a)
+ - public final 'java' 'Lcom/sun/tools/javac/util/Name;' @264  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33ae8} (0xe03e675d)
+ - public final 'java_lang' 'Lcom/sun/tools/javac/util/Name;' @268  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33b00} (0xe03e6760)
+ - public final 'jdk_internal_javac' 'Lcom/sun/tools/javac/util/Name;' @272  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33b18} (0xe03e6763)
+ - public final 'java_base' 'Lcom/sun/tools/javac/util/Name;' @276  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33b30} (0xe03e6766)
+ - public final 'jdk_unsupported' 'Lcom/sun/tools/javac/util/Name;' @280  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33b48} (0xe03e6769)
+ - public final 'Annotation' 'Lcom/sun/tools/javac/util/Name;' @284  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33b60} (0xe03e676c)
+ - public final 'AnnotationDefault' 'Lcom/sun/tools/javac/util/Name;' @288  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33b78} (0xe03e676f)
+ - public final 'BootstrapMethods' 'Lcom/sun/tools/javac/util/Name;' @292  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33b90} (0xe03e6772)
+ - public final 'Bridge' 'Lcom/sun/tools/javac/util/Name;' @296  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33ba8} (0xe03e6775)
+ - public final 'CharacterRangeTable' 'Lcom/sun/tools/javac/util/Name;' @300  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33bc0} (0xe03e6778)
+ - public final 'Code' 'Lcom/sun/tools/javac/util/Name;' @304  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33bd8} (0xe03e677b)
+ - public final 'CompilationID' 'Lcom/sun/tools/javac/util/Name;' @308  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33bf0} (0xe03e677e)
+ - public final 'ConstantValue' 'Lcom/sun/tools/javac/util/Name;' @312  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33c08} (0xe03e6781)
+ - public final 'Deprecated' 'Lcom/sun/tools/javac/util/Name;' @316  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33c20} (0xe03e6784)
+ - public final 'EnclosingMethod' 'Lcom/sun/tools/javac/util/Name;' @320  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33c38} (0xe03e6787)
+ - public final 'Enum' 'Lcom/sun/tools/javac/util/Name;' @324  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33c50} (0xe03e678a)
+ - public final 'Exceptions' 'Lcom/sun/tools/javac/util/Name;' @328  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33c68} (0xe03e678d)
+ - public final 'InnerClasses' 'Lcom/sun/tools/javac/util/Name;' @332  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33c80} (0xe03e6790)
+ - public final 'LineNumberTable' 'Lcom/sun/tools/javac/util/Name;' @336  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33c98} (0xe03e6793)
+ - public final 'LocalVariableTable' 'Lcom/sun/tools/javac/util/Name;' @340  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33cb0} (0xe03e6796)
+ - public final 'LocalVariableTypeTable' 'Lcom/sun/tools/javac/util/Name;' @344  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33cc8} (0xe03e6799)
+ - public final 'MethodParameters' 'Lcom/sun/tools/javac/util/Name;' @348  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33ce0} (0xe03e679c)
+ - public final 'Module' 'Lcom/sun/tools/javac/util/Name;' @352  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33cf8} (0xe03e679f)
+ - public final 'ModuleResolution' 'Lcom/sun/tools/javac/util/Name;' @356  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33d10} (0xe03e67a2)
+ - public final 'NestHost' 'Lcom/sun/tools/javac/util/Name;' @360  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33d28} (0xe03e67a5)
+ - public final 'NestMembers' 'Lcom/sun/tools/javac/util/Name;' @364  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33d40} (0xe03e67a8)
+ - public final 'Record' 'Lcom/sun/tools/javac/util/Name;' @368  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33d58} (0xe03e67ab)
+ - public final 'RuntimeInvisibleAnnotations' 'Lcom/sun/tools/javac/util/Name;' @372  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33d70} (0xe03e67ae)
+ - public final 'RuntimeInvisibleParameterAnnotations' 'Lcom/sun/tools/javac/util/Name;' @376  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33d88} (0xe03e67b1)
+ - public final 'RuntimeInvisibleTypeAnnotations' 'Lcom/sun/tools/javac/util/Name;' @380  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33da0} (0xe03e67b4)
+ - public final 'RuntimeVisibleAnnotations' 'Lcom/sun/tools/javac/util/Name;' @384  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33db8} (0xe03e67b7)
+ - public final 'RuntimeVisibleParameterAnnotations' 'Lcom/sun/tools/javac/util/Name;' @388  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33de0} (0xe03e67bc)
+ - public final 'RuntimeVisibleTypeAnnotations' 'Lcom/sun/tools/javac/util/Name;' @392  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33df8} (0xe03e67bf)
+ - public final 'Signature' 'Lcom/sun/tools/javac/util/Name;' @396  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33e10} (0xe03e67c2)
+ - public final 'SourceFile' 'Lcom/sun/tools/javac/util/Name;' @400  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33e28} (0xe03e67c5)
+ - public final 'SourceID' 'Lcom/sun/tools/javac/util/Name;' @404  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33e40} (0xe03e67c8)
+ - public final 'StackMap' 'Lcom/sun/tools/javac/util/Name;' @408  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33e58} (0xe03e67cb)
+ - public final 'StackMapTable' 'Lcom/sun/tools/javac/util/Name;' @412  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33e70} (0xe03e67ce)
+ - public final 'Synthetic' 'Lcom/sun/tools/javac/util/Name;' @416  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33e88} (0xe03e67d1)
+ - public final 'Value' 'Lcom/sun/tools/javac/util/Name;' @420  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33ea0} (0xe03e67d4)
+ - public final 'Varargs' 'Lcom/sun/tools/javac/util/Name;' @424  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33eb8} (0xe03e67d7)
+ - public final 'PermittedSubclasses' 'Lcom/sun/tools/javac/util/Name;' @428  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33ed0} (0xe03e67da)
+ - public final 'ANNOTATION_TYPE' 'Lcom/sun/tools/javac/util/Name;' @432  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33ee8} (0xe03e67dd)
+ - public final 'CONSTRUCTOR' 'Lcom/sun/tools/javac/util/Name;' @436  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33f00} (0xe03e67e0)
+ - public final 'FIELD' 'Lcom/sun/tools/javac/util/Name;' @440  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33f18} (0xe03e67e3)
+ - public final 'LOCAL_VARIABLE' 'Lcom/sun/tools/javac/util/Name;' @444  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33f30} (0xe03e67e6)
+ - public final 'METHOD' 'Lcom/sun/tools/javac/util/Name;' @448  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33f48} (0xe03e67e9)
+ - public final 'MODULE' 'Lcom/sun/tools/javac/util/Name;' @452  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33f60} (0xe03e67ec)
+ - public final 'PACKAGE' 'Lcom/sun/tools/javac/util/Name;' @456  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33f78} (0xe03e67ef)
+ - public final 'PARAMETER' 'Lcom/sun/tools/javac/util/Name;' @460  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33f90} (0xe03e67f2)
+ - public final 'TYPE' 'Lcom/sun/tools/javac/util/Name;' @464  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33fa8} (0xe03e67f5)
+ - public final 'TYPE_PARAMETER' 'Lcom/sun/tools/javac/util/Name;' @468  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33fc0} (0xe03e67f8)
+ - public final 'TYPE_USE' 'Lcom/sun/tools/javac/util/Name;' @472  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33fd8} (0xe03e67fb)
+ - public final 'RECORD_COMPONENT' 'Lcom/sun/tools/javac/util/Name;' @476  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f33ff0} (0xe03e67fe)
+ - public final 'CLASS' 'Lcom/sun/tools/javac/util/Name;' @480  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34008} (0xe03e6801)
+ - public final 'RUNTIME' 'Lcom/sun/tools/javac/util/Name;' @484  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34020} (0xe03e6804)
+ - public final 'SOURCE' 'Lcom/sun/tools/javac/util/Name;' @488  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34038} (0xe03e6807)
+ - public final 'T' 'Lcom/sun/tools/javac/util/Name;' @492  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34050} (0xe03e680a)
+ - public final 'ex' 'Lcom/sun/tools/javac/util/Name;' @496  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34068} (0xe03e680d)
+ - public final 'module_info' 'Lcom/sun/tools/javac/util/Name;' @500  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34080} (0xe03e6810)
+ - public final 'package_info' 'Lcom/sun/tools/javac/util/Name;' @504  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34098} (0xe03e6813)
+ - public final 'requireNonNull' 'Lcom/sun/tools/javac/util/Name;' @508  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f340b0} (0xe03e6816)
+ - public final 'main' 'Lcom/sun/tools/javac/util/Name;' @512  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f340c8} (0xe03e6819)
+ - public final 'lambda' 'Lcom/sun/tools/javac/util/Name;' @516  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f340e0} (0xe03e681c)
+ - public final 'metafactory' 'Lcom/sun/tools/javac/util/Name;' @520  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f340f8} (0xe03e681f)
+ - public final 'altMetafactory' 'Lcom/sun/tools/javac/util/Name;' @524  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34110} (0xe03e6822)
+ - public final 'dollarThis' 'Lcom/sun/tools/javac/util/Name;' @528  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34128} (0xe03e6825)
+ - public final 'makeConcat' 'Lcom/sun/tools/javac/util/Name;' @532  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34140} (0xe03e6828)
+ - public final 'makeConcatWithConstants' 'Lcom/sun/tools/javac/util/Name;' @536  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34158} (0xe03e682b)
+ - public final 'bootstrap' 'Lcom/sun/tools/javac/util/Name;' @540  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34170} (0xe03e682e)
+ - public final 'record' 'Lcom/sun/tools/javac/util/Name;' @544  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34188} (0xe03e6831)
+ - public final 'non' 'Lcom/sun/tools/javac/util/Name;' @548  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f341a0} (0xe03e6834)
+ - public final 'serialPersistentFields' 'Lcom/sun/tools/javac/util/Name;' @552  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f341b8} (0xe03e6837)
+ - public final 'writeObject' 'Lcom/sun/tools/javac/util/Name;' @556  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f341d0} (0xe03e683a)
+ - public final 'writeReplace' 'Lcom/sun/tools/javac/util/Name;' @560  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f341e8} (0xe03e683d)
+ - public final 'readObjectNoData' 'Lcom/sun/tools/javac/util/Name;' @564  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34200} (0xe03e6840)
+ - public final 'permits' 'Lcom/sun/tools/javac/util/Name;' @568  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34218} (0xe03e6843)
+ - public final 'sealed' 'Lcom/sun/tools/javac/util/Name;' @572  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34230} (0xe03e6846)
+ - public final 'typeSwitch' 'Lcom/sun/tools/javac/util/Name;' @576  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34248} (0xe03e6849)
+ - public final 'enumSwitch' 'Lcom/sun/tools/javac/util/Name;' @580  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34260} (0xe03e684c)
+ - public final 'enumConstant' 'Lcom/sun/tools/javac/util/Name;' @584  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34278} (0xe03e684f)
+ - public final 'process' 'Lcom/sun/tools/javac/util/Name;' @588  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34290} (0xe03e6852)
+ - public final 'STR' 'Lcom/sun/tools/javac/util/Name;' @592  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f342a8} (0xe03e6855)
+ - public final 'RAW' 'Lcom/sun/tools/javac/util/Name;' @596  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f342c0} (0xe03e6858)
+ - public final 'newStringTemplate' 'Lcom/sun/tools/javac/util/Name;' @600  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f342d8} (0xe03e685b)
+ - public final 'newLargeStringTemplate' 'Lcom/sun/tools/javac/util/Name;' @604  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f342f0} (0xe03e685e)
+ - public final 'processStringTemplate' 'Lcom/sun/tools/javac/util/Name;' @608  a 'com/sun/tools/javac/util/StringNameTable$NameImpl'{0x0000000701f34308} (0xe03e6861)
+ - public final 'table' 'Lcom/sun/tools/javac/util/Name$Table;' @612  a 'com/sun/tools/javac/util/StringNameTable'{0x0000000701f33280} (0xe03e6650)
+stack at sp + 3 slots: 0x0000000701f35680 is an oop: com.sun.tools.javac.jvm.ClassReader 
+{0x0000000701f35680} - klass: 'com/sun/tools/javac/jvm/ClassReader'
+ - ---- fields (total size 23 words):
+ - protected 'bp' 'I' @12  5854 (0x000016de)
+ - 'majorVersion' 'I' @16  66 (0x00000042)
+ - 'minorVersion' 'I' @20  0 (0x00000000)
+ - 'sigp' 'I' @24  47 (0x0000002f)
+ - 'siglimit' 'I' @28  47 (0x0000002f)
+ - 'sbp' 'I' @32  0 (0x00000000)
+ - 'verbose' 'Z' @36  false (0x00)
+ - 'allowModules' 'Z' @37  true (0x01)
+ - 'allowSealedTypes' 'Z' @38  true (0x01)
+ - 'allowRecords' 'Z' @39  true (0x01)
+ - 'lintClassfile' 'Z' @40  false (0x00)
+ - 'warnOnIllegalUtf8' 'Z' @41  false (0x00)
+ - public 'saveParameterNames' 'Z' @42  false (0x00)
+ - 'sigEnterPhase' 'Z' @43  false (0x00)
+ - private 'readingClassAttr' 'Z' @44  false (0x00)
+ - public 'filling' 'Z' @45  true (0x01)
+ - private final 'annotate' 'Lcom/sun/tools/javac/comp/Annotate;' @48  a 'com/sun/tools/javac/comp/Annotate'{0x0000000701f35738} (0xe03e6ae7)
+ - public final 'profile' 'Lcom/sun/tools/javac/jvm/Profile;' @52  a 'com/sun/tools/javac/jvm/Profile$1'{0x0000000701fa4f80} (0xe03f49f0)
+ - final 'log' 'Lcom/sun/tools/javac/util/Log;' @56  a 'com/sun/tools/javac/util/Log'{0x0000000701e00770} (0xe03c00ee)
+ - 'syms' 'Lcom/sun/tools/javac/code/Symtab;' @60  a 'com/sun/tools/javac/code/Symtab'{0x0000000701fbf870} (0xe03f7f0e)
+ - 'types' 'Lcom/sun/tools/javac/code/Types;' @64  a 'com/sun/tools/javac/code/Types'{0x0000000701feff88} (0xe03fdff1)
+ - final 'names' 'Lcom/sun/tools/javac/util/Names;' @68  a 'com/sun/tools/javac/util/Names'{0x0000000701f33298} (0xe03e6653)
+ - private final 'fileManager' 'Ljavax/tools/JavaFileManager;' @72  a 'com/sun/tools/javac/file/JavacFileManager'{0x0000000701e81730} (0xe03d02e6)
+ - 'diagFactory' 'Lcom/sun/tools/javac/util/JCDiagnostic$Factory;' @76  a 'com/sun/tools/javac/util/JCDiagnostic$Factory'{0x0000000701e007c8} (0xe03c00f9)
+ - 'dcfh' 'Lcom/sun/tools/javac/code/DeferredCompletionFailureHandler;' @80  a 'com/sun/tools/javac/code/DeferredCompletionFailureHandler'{0x0000000701ff2290} (0xe03fe452)
+ - 'preview' 'Lcom/sun/tools/javac/code/Preview;' @84  a 'com/sun/tools/javac/code/Preview'{0x0000000701ff1aa8} (0xe03fe355)
+ - protected 'typevars' 'Lcom/sun/tools/javac/code/Scope$WriteableScope;' @88  a 'com/sun/tools/javac/code/Scope$ScopeImpl'{0x000000070343b038} (0xe0687607)
+ - private 'interimUses' 'Lcom/sun/tools/javac/util/List;' @92  a 'com/sun/tools/javac/util/List$1'{0x0000000701e20f68} (0xe03c41ed)
+ - private 'interimProvides' 'Lcom/sun/tools/javac/util/List;' @96  a 'com/sun/tools/javac/util/List$1'{0x0000000701e20f68} (0xe03c41ed)
+ - protected 'currentClassFile' 'Ljavax/tools/JavaFileObject;' @100  a 'com/sun/tools/javac/file/PathFileObject$DirectoryFileObject'{0x000000070235f3d0} (0xe046be7a)
+ - protected 'currentOwner' 'Lcom/sun/tools/javac/code/Symbol;' @104  a 'com/sun/tools/javac/code/Symbol$ClassSymbol'{0x0000000701fec160} (0xe03fd82c)
+ - protected 'currentModule' 'Lcom/sun/tools/javac/code/Symbol$ModuleSymbol;' @108  a 'com/sun/tools/javac/code/Symbol$ModuleSymbol'{0x0000000701fc0190} (0xe03f8032)
+ - 'buf' 'Lcom/sun/tools/javac/util/ByteBuffer;' @112  a 'com/sun/tools/javac/util/ByteBuffer'{0x0000000701f35dd8} (0xe03e6bbb)
+ - 'poolReader' 'Lcom/sun/tools/javac/jvm/PoolReader;' @116  a 'com/sun/tools/javac/jvm/PoolReader'{0x000000070343a630} (0xe06874c6)
+ - 'utf8validation' 'Lcom/sun/tools/javac/util/Convert$Validation;' @120  a 'com/sun/tools/javac/util/Convert$Validation'{0x00000007fff91dd8} (0xffff23bb)
+ - 'parameterNameIndicesLvt' '[I' @124  null (0x00000000)
+ - 'parameterNameIndicesMp' '[I' @128  null (0x00000000)
+ - 'parameterAccessFlags' '[I' @132  null (0x00000000)
+ - 'parameterAnnotations' '[Lcom/sun/tools/javac/jvm/ClassReader$ParameterAnnotations;' @136  null (0x00000000)
+ - 'warnedAttrs' 'Ljava/util/Set;' @140  a 'java/util/HashSet'{0x0000000701f35df0} (0xe03e6bbe)
+ - 'target' 'Lcom/sun/tools/javac/jvm/ClassReader$CompoundAnnotationProxy;' @144  null (0x00000000)
+ - 'repeatable' 'Lcom/sun/tools/javac/jvm/ClassReader$CompoundAnnotationProxy;' @148  null (0x00000000)
+ - 'signature' '[B' @152  [B{0x0000000703444930} (0xe0688926)
+ - 'signatureBuffer' '[B' @156  [B{0x00000007027266d8} (0xe04e4cdb)
+ - protected 'CLASS_ATTRIBUTE' 'Ljava/util/Set;' @160  a 'java/util/RegularEnumSet'{0x0000000701f35e40} (0xe03e6bc8)
+ - protected 'MEMBER_ATTRIBUTE' 'Ljava/util/Set;' @164  a 'java/util/RegularEnumSet'{0x0000000701f35e60} (0xe03e6bcc)
+ - protected 'CLASS_OR_MEMBER_ATTRIBUTE' 'Ljava/util/Set;' @168  a 'java/util/RegularEnumSet'{0x0000000701f35e80} (0xe03e6bd0)
+ - protected 'attributeReaders' 'Ljava/util/Map;' @172  a 'java/util/HashMap'{0x0000000701f35ea0} (0xe03e6bd4)
+ - private 'missingTypeVariables' 'Lcom/sun/tools/javac/util/List;' @176  a 'com/sun/tools/javac/util/List$1'{0x0000000701e20f68} (0xe03c41ed)
+ - private 'foundTypeVariables' 'Lcom/sun/tools/javac/util/List;' @180  a 'com/sun/tools/javac/util/List$1'{0x0000000701e20f68} (0xe03c41ed)
+stack at sp + 4 slots: 0x0000020cf2e68b50 is a thread
+stack at sp + 5 slots: 0x00007ffe76e2721b jvm.dll
+stack at sp + 6 slots: 0x0000020cf2e68b78 points into unknown readable memory: 0x0000000000000000 | 00 00 00 00 00 00 00 00
+stack at sp + 7 slots: 0x0000020cf5097530 points into unknown readable memory: 0x00007ffe770d8680 | 80 86 0d 77 fe 7f 00 00
+
+
+Compiled method (c2) 1403 1744       4       com.sun.tools.javac.util.ListBuffer::append (66 bytes)
+ total in heap  [0x0000020c87b81d10,0x0000020c87b824f8] = 2024
+ relocation     [0x0000020c87b81e68,0x0000020c87b81eb0] = 72
+ main code      [0x0000020c87b81ec0,0x0000020c87b823e0] = 1312
+ stub code      [0x0000020c87b823e0,0x0000020c87b82408] = 40
+ oops           [0x0000020c87b82408,0x0000020c87b82418] = 16
+ metadata       [0x0000020c87b82418,0x0000020c87b82438] = 32
+ scopes data    [0x0000020c87b82438,0x0000020c87b82470] = 56
+ scopes pcs     [0x0000020c87b82470,0x0000020c87b824c0] = 80
+ dependencies   [0x0000020c87b824c0,0x0000020c87b824c8] = 8
+ handler table  [0x0000020c87b824c8,0x0000020c87b824f8] = 48
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Entry Point]
+  # {method} {0x0000020cd650efe8} 'append' '(Ljava/lang/Object;)Lcom/sun/tools/javac/util/ListBuffer;' in 'com/sun/tools/javac/util/ListBuffer'
+  # this:     rdx:rdx   = 'com/sun/tools/javac/util/ListBuffer'
+  # parm0:    r8:r8     = 'java/lang/Object'
+  #           [sp+0x60]  (sp of caller)
+  0x0000020c87b81ec0: 448b 5208 | 49bb 0000 | 0095 0c02 | 0000 4d03 | d349 3bc2 
+
+  0x0000020c87b81ed4: ;   {runtime_call ic_miss_stub}
+  0x0000020c87b81ed4: 0f85 a6c8 | 9fff 6690 | 0f1f 4000 
+[Verified Entry Point]
+  0x0000020c87b81ee0: 8984 2400 | 80ff ff55 | 4883 ec50 | 4181 7f20 | 0400 0000 | 0f85 da04 | 0000 4889 | 5424 2049 
+  0x0000020c87b81f00: 8be8 4d85 | c00f 841a | 0400 0044 | 0fb6 5210 | 4585 d20f | 85f2 0100 | 0049 8b9f | b801 0000 
+  0x0000020c87b81f20: 4c8b d349 | 83c2 184d | 3b97 c801 | 0000 0f83 | d103 0000 | 4d89 97b8 | 0100 0041 | 0f0d 8ac0 
+  0x0000020c87b81f40: 0000 0048 | c703 0100 
+
+  0x0000020c87b81f48: ;   {metadata('com/sun/tools/javac/util/List')}
+  0x0000020c87b81f48: 0000 c743 | 0828 1801 | 0144 8963 | 144c 8b54 | 2420 418b | 7a18 4c8b | d549 c1ea | 0344 8953 
+  0x0000020c87b81f68: ;   {oop(a 'com/sun/tools/javac/util/List$1'{0x0000000701e20f68})}
+  0x0000020c87b81f68: 0cc7 4310 | ed41 3ce0 | 488b f348 | c1ee 0385 | ff0f 85e6 | 0000 0090 | 4180 7f38 | 000f 85e8 
+  0x0000020c87b81f88: 0200 004c | 8b54 2420 | 4189 7218 | 4c8b db4d | 33da 49c1 | eb15 6690 | 4d85 db74 | 1a49 c1ea 
+  0x0000020c87b81fa8: 0948 b900 | 106f fa0c | 0200 0049 | 03ca 8039 | 020f 85f4 | 0200 0090 | 4180 7f38 | 000f 856c 
+  0x0000020c87b81fc8: 0200 004c | 8b54 2420 | 4189 7214 | 4c8b d34c | 8b5c 2420 | 4d33 d349 | c1ea 154d | 85d2 0f84 
+  0x0000020c87b81fe8: 0001 0000 | 49c1 eb09 | 49b8 0010 | 6ffa 0c02 | 0000 4d03 | c366 6690 | 4180 3802 | 0f84 e200 
+  0x0000020c87b82008: 0000 4d8b | 5748 4d8b | 5f40 f083 | 4424 c000 | 0f1f 8400 | 0000 0000 | 4180 3800 | 0f84 c200 
+  0x0000020c87b82028: 0000 4588 | 204d 85db | 7520 498b | c849 8bd7 | 49ba c03e | a076 fe7f | 0000 41ff 
+
+  0x0000020c87b82044: ;   {other}
+  0x0000020c87b82044: d20f 1f84 | 0000 0000 | 00e9 9a00 | 0000 4f89 | 441a f849 | 83c3 f84d | 895f 4090 | e987 0000 
+  0x0000020c87b82064: 0041 807f | 3800 0f85 | ad00 0000 | 4189 74fc | 104c 8bd3 | 4d8d 1cfc | 4d33 d349 | c1ea 154d 
+  0x0000020c87b82084: 85d2 7421 | 49c1 eb09 | 48b9 0010 | 6ffa 0c02 | 0000 4903 | cb0f 1f80 | 0000 0000 | 8039 020f 
+  0x0000020c87b820a4: 853c 0100 | 0041 807f | 3800 0f85 | a100 0000 | 4c8b 5424 | 2041 8972 | 184c 8bd3 | 4c8b 5c24 
+  0x0000020c87b820c4: 204d 33d3 | 49c1 ea15 | 4d85 d274 | 1b49 c1eb | 0949 b800 | 106f fa0c | 0200 004d | 03c3 4180 
+  0x0000020c87b820e4: 3802 0f85 | a700 0000 | 4c8b 5424 | 2041 ff42 | 0c49 8bc2 | 4883 c450 
+
+  0x0000020c87b820fc: ;   {poll_return}
+  0x0000020c87b820fc: 5d49 3ba7 | 5804 0000 | 0f87 b402 
+
+  0x0000020c87b82108: ;   {optimized virtual_call}
+  0x0000020c87b82108: 0000 c3e8 
+
+  0x0000020c87b8210c: ; ImmutableOopMap {rbp=Oop [32]=Oop }
+                      ;*invokevirtual copy {reexecute=0 rethrow=0 return_oop=0}
+                      ; - com.sun.tools.javac.util.ListBuffer::append@13 (line 128)
+  0x0000020c87b8210c: 70c9 9fff 
+
+  0x0000020c87b82110: ;   {other}
+  0x0000020c87b82110: 0f1f 8400 | 0004 0000 | e9fc fdff | ff45 8b5c | fc10 4585 | db0f 8445 | ffff ff4d | 8b57 2849 
+  0x0000020c87b82130: 8bcb 48c1 | e103 4d85 | d20f 8416 | 0200 004d | 8b5f 304b | 894c 13f8 | 4983 c2f8 | 4d89 5728 
+  0x0000020c87b82150: e91b ffff | ff4c 8b54 | 2420 458b | 5218 6690 | 4585 d20f | 844b ffff | ff4d 8b5f | 2849 8bca 
+  0x0000020c87b82170: 48c1 e103 | 4d85 db0f | 84bb 0100 | 004d 8b57 | 304b 894c | 1af8 4983 | c3f8 4d89 | 5f28 e921 
+  0x0000020c87b82190: ffff ff4d | 8b57 404d | 8b5f 48f0 | 8344 24c0 | 0041 8038 | 000f 8441 | ffff ff45 | 8820 4d85 
+  0x0000020c87b821b0: d275 2049 | 8bc8 498b | d749 bac0 | 3ea0 76fe | 7f00 0041 
+
+  0x0000020c87b821c4: ;   {other}
+  0x0000020c87b821c4: ffd2 0f1f | 8400 0000 | 0000 e919 | ffff ff4f | 8944 13f8 | 4983 c2f8 | 4d89 5740 | e907 ffff 
+  0x0000020c87b821e4: ff4d 8b57 | 484d 8b5f | 40f0 8344 | 24c0 0080 | 3900 0f84 | adfe ffff | 4488 2190 | 4d85 db75 
+  0x0000020c87b82204: 2049 8bd7 | 49ba c03e | a076 fe7f | 0000 41ff 
+
+  0x0000020c87b82214: ;   {other}
+  0x0000020c87b82214: d20f 1f84 | 0000 0000 | 0066 6690 | e984 feff | ff4b 894c | 1af8 4983 | c3f8 4d89 | 5f40 e972 
+  0x0000020c87b82234: feff ff4c | 8b54 2420 | 458b 5214 | 4585 d20f | 8482 fdff | ff4d 8b5f | 2849 8bca | 48c1 e103 
+  0x0000020c87b82254: 4d85 db0f | 8432 0100 | 004d 8b57 | 304b 894c | 1af8 4983 | c3f8 4d89 | 5f28 e958 | fdff ff4c 
+  0x0000020c87b82274: 8b54 2420 | 458b 5218 | 0f1f 4000 | 4585 d20f | 8402 fdff | ff4d 8b5f | 2849 8bca | 48c1 e103 
+  0x0000020c87b82294: 4d85 db0f | 84d5 0000 | 004d 8b57 | 304b 894c | 1af8 4983 | c3f8 4d89 | 5f28 e9d8 | fcff ff4d 
+  0x0000020c87b822b4: 8b57 484d | 8b5f 40f0 | 8344 24c0 | 0080 3900 | 0f84 f5fc | ffff 4488 | 214d 85db | 751d 498b 
+  0x0000020c87b822d4: d749 bac0 | 3ea0 76fe | 7f00 0041 
+
+  0x0000020c87b822e0: ;   {other}
+  0x0000020c87b822e0: ffd2 0f1f | 8400 0000 | 0000 e9d0 | fcff ff4b | 894c 1af8 | 4983 c3f8 | 4d89 5f40 | 0f1f 4000 
+  0x0000020c87b82300: e9ba fcff 
+
+  0x0000020c87b82304: ;   {metadata('com/sun/tools/javac/util/List')}
+  0x0000020c87b82304: ff48 ba28 | 1801 960c 
+
+  0x0000020c87b8230c: ;   {runtime_call _new_instance_Java}
+  0x0000020c87b8230c: 0200 00e8 
+
+  0x0000020c87b82310: ; ImmutableOopMap {rbp=Oop [32]=Oop }
+                      ;*new {reexecute=0 rethrow=0 return_oop=1}
+                      ; - com.sun.tools.javac.util.List::of@0 (line 137)
+                      ; - com.sun.tools.javac.util.ListBuffer::append@17 (line 129)
+  0x0000020c87b82310: 6cb8 acff 
+
+  0x0000020c87b82314: ;   {other}
+  0x0000020c87b82314: 0f1f 8400 | 0406 0001 | 488b d890 | e930 fcff | ffba 45ff 
+
+  0x0000020c87b82328: ;   {runtime_call UncommonTrapBlob}
+  0x0000020c87b82328: ffff 90e8 
+
+  0x0000020c87b8232c: ; ImmutableOopMap {rbp=Oop [32]=Oop }
+                      ;*ifnonnull {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) com.sun.tools.javac.util.Assert::checkNonNull@1 (line 61)
+                      ; - com.sun.tools.javac.util.ListBuffer::append@1 (line 127)
+  0x0000020c87b8232c: d022 a0ff 
+
+  0x0000020c87b82330: ;   {other}
+  0x0000020c87b82330: 0f1f 8400 | 2006 0002 | 498b d749 | bae0 3ea0 | 76fe 7f00 | 0041 ffd2 
+
+  0x0000020c87b82348: ;   {other}
+  0x0000020c87b82348: 0f1f 8400 | 0000 0000 | e95f fdff | ff49 8bd7 | 49ba e03e | a076 fe7f | 0000 41ff 
+
+  0x0000020c87b82364: ;   {other}
+  0x0000020c87b82364: d20f 1f84 | 0000 0000 | 00e9 fefc | ffff 498b | d749 bae0 | 3ea0 76fe | 7f00 0041 
+
+  0x0000020c87b82380: ;   {other}
+  0x0000020c87b82380: ffd2 0f1f | 8400 0000 | 0000 e9fc | fbff ff49 | 8bd7 49ba | e03e a076 | fe7f 0000 
+
+  0x0000020c87b8239c: ;   {other}
+  0x0000020c87b8239c: 41ff d20f | 1f84 0000 | 0000 00e9 | 1ffc ffff | 488b d0eb | 0348 8bd0 | 4883 c450 
+
+  0x0000020c87b823b8: ;   {runtime_call _rethrow_Java}
+  0x0000020c87b823b8: 5de9 c2f9 
+
+  0x0000020c87b823bc: ;   {internal_word}
+  0x0000020c87b823bc: acff 49ba | fd20 b887 | 0c02 0000 | 4d89 9770 
+
+  0x0000020c87b823cc: ;   {runtime_call SafepointBlob}
+  0x0000020c87b823cc: 0400 00e9 | 2c33 a0ff 
+
+  0x0000020c87b823d4: ;   {runtime_call StubRoutines (final stubs)}
+  0x0000020c87b823d4: e807 299e | ffe9 1cfb | ffff f4f4 
+[Stub Code]
+  0x0000020c87b823e0: ;   {no_reloc}
+  0x0000020c87b823e0: 48bb 0000 | 0000 0000 
+
+  0x0000020c87b823e8: ;   {runtime_call}
+  0x0000020c87b823e8: 0000 e9fb 
+
+  0x0000020c87b823ec: ;   {runtime_call ExceptionBlob}
+  0x0000020c87b823ec: ffff ffe9 | 8cba acff 
+[Deopt Handler Code]
+  0x0000020c87b823f4: e800 0000 | 0048 832c 
+
+  0x0000020c87b823fc: ;   {runtime_call DeoptimizationBlob}
+  0x0000020c87b823fc: 2405 e99d | 25a0 fff4 | f4f4 f4f4 
+[/MachCode]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x0000020cda7633d0, length=13, elements={
+0x0000020cf2e68b50, 0x0000020cfedc5330, 0x0000020cfedc7060, 0x0000020cfedc8c30,
+0x0000020cfedca2c0, 0x0000020cfedcb080, 0x0000020cfedcdaf0, 0x0000020cfedcf890,
+0x0000020cfeddb850, 0x0000020cda14ac60, 0x0000020cda2da5d0, 0x0000020cda2db8b0,
+0x0000020cdb972d80
+}
+
+Java Threads: ( => current thread )
+=>0x0000020cf2e68b50 JavaThread "main"                              [_thread_in_Java, id=16308, stack(0x000000501b600000,0x000000501b700000) (1024K)]
+  0x0000020cfedc5330 JavaThread "Reference Handler"          daemon [_thread_blocked, id=18460, stack(0x000000501be00000,0x000000501bf00000) (1024K)]
+  0x0000020cfedc7060 JavaThread "Finalizer"                  daemon [_thread_blocked, id=12264, stack(0x000000501bf00000,0x000000501c000000) (1024K)]
+  0x0000020cfedc8c30 JavaThread "Signal Dispatcher"          daemon [_thread_blocked, id=7116, stack(0x000000501c000000,0x000000501c100000) (1024K)]
+  0x0000020cfedca2c0 JavaThread "Attach Listener"            daemon [_thread_blocked, id=9196, stack(0x000000501c100000,0x000000501c200000) (1024K)]
+  0x0000020cfedcb080 JavaThread "Service Thread"             daemon [_thread_blocked, id=7068, stack(0x000000501c200000,0x000000501c300000) (1024K)]
+  0x0000020cfedcdaf0 JavaThread "Monitor Deflation Thread"   daemon [_thread_blocked, id=13964, stack(0x000000501c300000,0x000000501c400000) (1024K)]
+  0x0000020cfedcf890 JavaThread "C2 CompilerThread0"         daemon [_thread_blocked, id=21232, stack(0x000000501c400000,0x000000501c500000) (1024K)]
+  0x0000020cfeddb850 JavaThread "C1 CompilerThread0"         daemon [_thread_blocked, id=12640, stack(0x000000501c500000,0x000000501c600000) (1024K)]
+  0x0000020cda14ac60 JavaThread "Common-Cleaner"             daemon [_thread_blocked, id=10156, stack(0x000000501c600000,0x000000501c700000) (1024K)]
+  0x0000020cda2da5d0 JavaThread "C2 CompilerThread1"         daemon [_thread_blocked, id=22152, stack(0x000000501c700000,0x000000501c800000) (1024K)]
+  0x0000020cda2db8b0 JavaThread "Notification Thread"        daemon [_thread_blocked, id=12116, stack(0x000000501c800000,0x000000501c900000) (1024K)]
+  0x0000020cdb972d80 JavaThread "C2 CompilerThread2"         daemon [_thread_blocked, id=6496, stack(0x000000501ce00000,0x000000501cf00000) (1024K)]
+Total: 13
+
+Other Threads:
+  0x0000020cfeda8c00 VMThread "VM Thread"                           [id=13152, stack(0x000000501bd00000,0x000000501be00000) (1024K)] _threads_hazard_ptr=0x0000020cda7633d0
+  0x0000020cfed92460 WatcherThread "VM Periodic Task Thread"        [id=1480, stack(0x000000501bc00000,0x000000501bd00000) (1024K)]
+  0x0000020cf50e3540 WorkerThread "GC Thread#0"                     [id=4812, stack(0x000000501b700000,0x000000501b800000) (1024K)]
+  0x0000020cda3bfd90 WorkerThread "GC Thread#1"                     [id=10284, stack(0x000000501c900000,0x000000501ca00000) (1024K)]
+  0x0000020cda416600 WorkerThread "GC Thread#2"                     [id=13460, stack(0x000000501ca00000,0x000000501cb00000) (1024K)]
+  0x0000020cda4169b0 WorkerThread "GC Thread#3"                     [id=16808, stack(0x000000501cb00000,0x000000501cc00000) (1024K)]
+  0x0000020cda67f7c0 WorkerThread "GC Thread#4"                     [id=3252, stack(0x000000501cc00000,0x000000501cd00000) (1024K)]
+  0x0000020cda7d20e0 WorkerThread "GC Thread#5"                     [id=17176, stack(0x000000501cd00000,0x000000501ce00000) (1024K)]
+  0x0000020cda9e6600 WorkerThread "GC Thread#6"                     [id=7844, stack(0x000000501cf00000,0x000000501d000000) (1024K)]
+  0x0000020cf51341c0 ConcurrentGCThread "G1 Main Marker"            [id=19588, stack(0x000000501b800000,0x000000501b900000) (1024K)]
+  0x0000020cf5136af0 WorkerThread "G1 Conc#0"                       [id=14072, stack(0x000000501b900000,0x000000501ba00000) (1024K)]
+  0x0000020cdaa01d20 WorkerThread "G1 Conc#1"                       [id=16420, stack(0x000000501d000000,0x000000501d100000) (1024K)]
+  0x0000020cf514ea30 ConcurrentGCThread "G1 Refine#0"               [id=15708, stack(0x000000501ba00000,0x000000501bb00000) (1024K)]
+  0x0000020cfec61400 ConcurrentGCThread "G1 Service"                [id=16380, stack(0x000000501bb00000,0x000000501bc00000) (1024K)]
+Total: 14
+
+Threads with active compile tasks:
+C2 CompilerThread0  1415 2204       4       com.sun.tools.javac.jvm.ClassReader::sigToType (881 bytes)
+C2 CompilerThread1  1415 2203       4       java.util.HashSet::add (20 bytes)
+C2 CompilerThread2  1415 1907   !   4       com.sun.tools.javac.jvm.ClassReader::classSigToType (482 bytes)
+Total: 3
+
+VM state: synchronizing (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007ffe7734bbb8] Threads_lock - owner thread: 0x0000020cfeda8c00
+[0x00007ffe7734bcb8] Heap_lock - owner thread: 0x0000020cf51341c0
+
+Heap address: 0x0000000701e00000, size: 4066 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000020c95000000-0x0000020c95c60000-0x0000020c95c60000), size 12976128, SharedBaseAddress: 0x0000020c95000000, ArchiveRelocationMode: 1.
+Compressed class space mapped at: 0x0000020c96000000-0x0000020cd6000000, reserved size: 1073741824
+Narrow klass base: 0x0000020c95000000, Narrow klass shift: 0, Narrow klass range: 0x41000000
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 4 size 8 Array Of Cards #cards 16 size 48 Howl #buckets 8 coarsen threshold 3686 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 4096
+ CPUs: 8 total, 8 available
+ Memory: 16258M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (Zero based)
+ Heap Region Size: 2M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 8M
+ Heap Max Capacity: 4066M
+ Pre-touch: Disabled
+ Parallel Workers: 8
+ Concurrent Workers: 2
+ Concurrent Refinement Workers: 8
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 13999K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 2 young (4096K), 1 survivors (2048K)
+ Metaspace       used 10068K, committed 10368K, reserved 1114112K
+  class space    used 1140K, committed 1280K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, TAMS=top-at-mark-start, PB=parsable bottom
+|   0|0x0000000701e00000, 0x0000000702000000, 0x0000000702000000|100%| O|  |TAMS 0x0000000702000000| PB 0x0000000701e00000| Untracked |  0
+|   1|0x0000000702000000, 0x0000000702200000, 0x0000000702200000|100%| O|  |TAMS 0x0000000702200000| PB 0x0000000702000000| Untracked |  0
+|   2|0x0000000702200000, 0x0000000702400000, 0x0000000702400000|100%| O|  |TAMS 0x0000000702400000| PB 0x0000000702200000| Untracked |  0
+|   3|0x0000000702400000, 0x0000000702600000, 0x0000000702600000|100%| O|  |TAMS 0x0000000702600000| PB 0x0000000702400000| Untracked |  0
+|   4|0x0000000702600000, 0x0000000702800000, 0x0000000702800000|100%| O|  |TAMS 0x00000007026e7618| PB 0x0000000702600000| Untracked |  0
+|   5|0x0000000702800000, 0x0000000702877b50, 0x0000000702a00000| 23%| O|  |TAMS 0x0000000702800000| PB 0x0000000702800000| Untracked |  0
+|   6|0x0000000702a00000, 0x0000000702a00000, 0x0000000702c00000|  0%| F|  |TAMS 0x0000000702a00000| PB 0x0000000702a00000| Untracked |  0
+|   7|0x0000000702c00000, 0x0000000702c00000, 0x0000000702e00000|  0%| F|  |TAMS 0x0000000702c00000| PB 0x0000000702c00000| Untracked |  0
+|   8|0x0000000702e00000, 0x0000000702f34490, 0x0000000703000000| 60%| S|CS|TAMS 0x0000000702e00000| PB 0x0000000702e00000| Complete |  0
+|   9|0x0000000703000000, 0x0000000703000000, 0x0000000703200000|  0%| F|  |TAMS 0x0000000703000000| PB 0x0000000703000000| Untracked |  0
+|  10|0x0000000703200000, 0x0000000703200000, 0x0000000703400000|  0%| F|  |TAMS 0x0000000703200000| PB 0x0000000703200000| Untracked |  0
+|  11|0x0000000703400000, 0x0000000703447878, 0x0000000703600000| 13%| E|  |TAMS 0x0000000703400000| PB 0x0000000703400000| Complete |  0
+|2032|0x00000007ffe00000, 0x0000000800000000, 0x0000000800000000|100%| O|  |TAMS 0x0000000800000000| PB 0x00000007ffe00000| Untracked |  0
+
+Card table byte_map: [0x0000020cfdf00000,0x0000020cfe700000] _byte_map_base: 0x0000020cfa6f1000
+
+Marking Bits: (CMBitMap*) 0x0000020cf50e3b60
+ Bits: [0x0000020c8f000000, 0x0000020c92f88000)
+
+Polling page: 0x0000020cf3040000
+
+Metaspace:
+
+Usage:
+  Non-class:      8.72 MB used.
+      Class:      1.11 MB used.
+       Both:      9.83 MB used.
+
+Virtual space:
+  Non-class space:       64.00 MB reserved,       8.88 MB ( 14%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,       1.25 MB ( <1%) committed,  1 nodes.
+             Both:        1.06 GB reserved,      10.12 MB ( <1%) committed. 
+
+Chunk freelists:
+   Non-Class:  5.37 MB
+       Class:  14.81 MB
+        Both:  20.18 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 21.00 MB
+CDS: on
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - use_allocation_guard: 0.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 0.
+num_arena_births: 72.
+num_arena_deaths: 0.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 162.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 0.
+num_chunks_taken_from_freelist: 393.
+num_chunk_merges: 0.
+num_chunk_splits: 287.
+num_chunks_enlarged: 231.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=120000Kb used=894Kb max_used=894Kb free=119105Kb
+ bounds [0x0000020c87ad0000, 0x0000020c87d40000, 0x0000020c8f000000]
+CodeHeap 'profiled nmethods': size=120000Kb used=4303Kb max_used=4303Kb free=115696Kb
+ bounds [0x0000020c80000000, 0x0000020c80440000, 0x0000020c87530000]
+CodeHeap 'non-nmethods': size=5760Kb used=1389Kb max_used=1448Kb free=4370Kb
+ bounds [0x0000020c87530000, 0x0000020c877a0000, 0x0000020c87ad0000]
+ total_blobs=2684 nmethods=2203 adapters=385
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 1.212 Thread 0x0000020cfeddb850 2200       3       com.sun.tools.javac.code.Attribute$Compound::<init> (8 bytes)
+Event: 1.212 Thread 0x0000020cfeddb850 nmethod 2200 0x0000020c8042d910 code [0x0000020c8042dac0, 0x0000020c8042dde0]
+Event: 1.212 Thread 0x0000020cfeddb850 2201       3       com.sun.tools.javac.code.Attribute$Compound::<init> (21 bytes)
+Event: 1.212 Thread 0x0000020cfeddb850 nmethod 2201 0x0000020c8042df10 code [0x0000020c8042e0c0, 0x0000020c8042e3b8]
+Event: 1.212 Thread 0x0000020cfeddb850 2188       3       com.sun.tools.javac.tree.JCTree$JCLiteral::accept (6 bytes)
+Event: 1.212 Thread 0x0000020cfeddb850 nmethod 2188 0x0000020c8042e490 code [0x0000020c8042e640, 0x0000020c8042e820]
+Event: 1.212 Thread 0x0000020cfeddb850 2205   !   3       com.sun.tools.javac.jvm.ClassReader$AnnotationDeproxy::resolvePossibleProxyType (93 bytes)
+Event: 1.219 Thread 0x0000020cfedcf890 nmethod 2133 0x0000020c87bac190 code [0x0000020c87bac3c0, 0x0000020c87bad2d8]
+Event: 1.219 Thread 0x0000020cfedcf890 2204       4       com.sun.tools.javac.jvm.ClassReader::sigToType (881 bytes)
+Event: 1.219 Thread 0x0000020cfeddb850 nmethod 2205 0x0000020c8042e910 code [0x0000020c8042eba0, 0x0000020c8042fb10]
+Event: 1.219 Thread 0x0000020cfeddb850 2207       3       com.sun.tools.javac.code.Symbol::initedMetadata (24 bytes)
+Event: 1.220 Thread 0x0000020cda2da5d0 nmethod 2152 0x0000020c87bad910 code [0x0000020c87badb40, 0x0000020c87baed18]
+Event: 1.220 Thread 0x0000020cfeddb850 nmethod 2207 0x0000020c80430090 code [0x0000020c80430240, 0x0000020c80430490]
+Event: 1.220 Thread 0x0000020cfeddb850 2208       3       com.sun.tools.javac.code.Symbol::enclClass (45 bytes)
+Event: 1.220 Thread 0x0000020cda2da5d0 2203       4       java.util.HashSet::add (20 bytes)
+Event: 1.220 Thread 0x0000020cfeddb850 nmethod 2208 0x0000020c80430590 code [0x0000020c80430780, 0x0000020c80430dc0]
+Event: 1.220 Thread 0x0000020cfeddb850 2209       3       com.sun.tools.javac.jvm.ClassReader$AnnotationCompleter::<init> (93 bytes)
+Event: 1.221 Thread 0x0000020cfeddb850 nmethod 2209 0x0000020c80431010 code [0x0000020c80431200, 0x0000020c80431948]
+Event: 1.221 Thread 0x0000020cfeddb850 2210       3       com.sun.tools.javac.jvm.ClassReader::readTypeToProxy (33 bytes)
+Event: 1.222 Thread 0x0000020cfeddb850 nmethod 2210 0x0000020c80431b10 code [0x0000020c80431e00, 0x0000020c80432fa0]
+
+GC Heap History (20 events):
+Event: 0.462 GC heap before
+{Heap before GC invocations=3 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 8192K, used 4634K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 2 young (4096K), 1 survivors (2048K)
+ Metaspace       used 7722K, committed 7872K, reserved 1114112K
+  class space    used 895K, committed 960K, reserved 1048576K
+}
+Event: 0.464 GC heap after
+{Heap after GC invocations=4 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 8192K, used 3606K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 7722K, committed 7872K, reserved 1114112K
+  class space    used 895K, committed 960K, reserved 1048576K
+}
+Event: 0.524 GC heap before
+{Heap before GC invocations=4 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 8192K, used 3606K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 2 young (4096K), 1 survivors (2048K)
+ Metaspace       used 7923K, committed 8064K, reserved 1114112K
+  class space    used 906K, committed 960K, reserved 1048576K
+}
+Event: 0.527 GC heap after
+{Heap after GC invocations=5 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 14336K, used 4286K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 7923K, committed 8064K, reserved 1114112K
+  class space    used 906K, committed 960K, reserved 1048576K
+}
+Event: 0.681 GC heap before
+{Heap before GC invocations=5 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 14336K, used 6334K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 1 survivors (2048K)
+ Metaspace       used 8819K, committed 9024K, reserved 1114112K
+  class space    used 1019K, committed 1152K, reserved 1048576K
+}
+Event: 0.685 GC heap after
+{Heap after GC invocations=6 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 14336K, used 5690K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 8819K, committed 9024K, reserved 1114112K
+  class space    used 1019K, committed 1152K, reserved 1048576K
+}
+Event: 0.739 GC heap before
+{Heap before GC invocations=6 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 14336K, used 9786K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 1 survivors (2048K)
+ Metaspace       used 8915K, committed 9088K, reserved 1114112K
+  class space    used 1022K, committed 1152K, reserved 1048576K
+}
+Event: 0.743 GC heap after
+{Heap after GC invocations=7 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 14336K, used 8004K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 8915K, committed 9088K, reserved 1114112K
+  class space    used 1022K, committed 1152K, reserved 1048576K
+}
+Event: 0.754 GC heap before
+{Heap before GC invocations=7 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 14336K, used 10052K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 2 young (4096K), 1 survivors (2048K)
+ Metaspace       used 8921K, committed 9088K, reserved 1114112K
+  class space    used 1022K, committed 1152K, reserved 1048576K
+}
+Event: 0.755 GC heap after
+{Heap after GC invocations=8 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 14336K, used 8379K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 8921K, committed 9088K, reserved 1114112K
+  class space    used 1022K, committed 1152K, reserved 1048576K
+}
+Event: 0.775 GC heap before
+{Heap before GC invocations=8 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 14336K, used 10427K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 2 young (4096K), 1 survivors (2048K)
+ Metaspace       used 8931K, committed 9152K, reserved 1114112K
+  class space    used 1022K, committed 1152K, reserved 1048576K
+}
+Event: 0.777 GC heap after
+{Heap after GC invocations=9 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 8431K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 8931K, committed 9152K, reserved 1114112K
+  class space    used 1022K, committed 1152K, reserved 1048576K
+}
+Event: 0.904 GC heap before
+{Heap before GC invocations=10 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 16623K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 5 young (10240K), 1 survivors (2048K)
+ Metaspace       used 9191K, committed 9408K, reserved 1114112K
+  class space    used 1052K, committed 1152K, reserved 1048576K
+}
+Event: 0.908 GC heap after
+{Heap after GC invocations=11 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 9864K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 9191K, committed 9408K, reserved 1114112K
+  class space    used 1052K, committed 1152K, reserved 1048576K
+}
+Event: 0.972 GC heap before
+{Heap before GC invocations=11 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 18056K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 5 young (10240K), 1 survivors (2048K)
+ Metaspace       used 9353K, committed 9536K, reserved 1114112K
+  class space    used 1070K, committed 1152K, reserved 1048576K
+}
+Event: 0.977 GC heap after
+{Heap after GC invocations=12 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 11266K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 9353K, committed 9536K, reserved 1114112K
+  class space    used 1070K, committed 1152K, reserved 1048576K
+}
+Event: 1.083 GC heap before
+{Heap before GC invocations=12 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 19458K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 5 young (10240K), 1 survivors (2048K)
+ Metaspace       used 9602K, committed 9856K, reserved 1114112K
+  class space    used 1081K, committed 1216K, reserved 1048576K
+}
+Event: 1.087 GC heap after
+{Heap after GC invocations=13 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 12731K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 9602K, committed 9856K, reserved 1114112K
+  class space    used 1081K, committed 1216K, reserved 1048576K
+}
+Event: 1.213 GC heap before
+{Heap before GC invocations=13 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 18875K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 4 young (8192K), 1 survivors (2048K)
+ Metaspace       used 10063K, committed 10368K, reserved 1114112K
+  class space    used 1140K, committed 1280K, reserved 1048576K
+}
+Event: 1.218 GC heap after
+{Heap after GC invocations=14 (full 0):
+ garbage-first heap   total reserved 4163584K, committed 26624K, used 13999K [0x0000000701e00000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 10063K, committed 10368K, reserved 1114112K
+  class space    used 1140K, committed 1280K, reserved 1048576K
+}
+
+Dll operation events (6 events):
+Event: 0.012 Loaded shared library C:\Program Files\Java\jdk-22\bin\java.dll
+Event: 0.042 Loaded shared library C:\Program Files\Java\jdk-22\bin\jsvml.dll
+Event: 0.076 Loaded shared library C:\Program Files\Java\jdk-22\bin\jimage.dll
+Event: 0.083 Loaded shared library C:\Program Files\Java\jdk-22\bin\net.dll
+Event: 0.085 Loaded shared library C:\Program Files\Java\jdk-22\bin\nio.dll
+Event: 0.191 Loaded shared library C:\Program Files\Java\jdk-22\bin\zip.dll
+
+Deoptimization events (20 events):
+Event: 0.999 Thread 0x0000020cf2e68b50 Uncommon trap: trap_request=0xffffffde fr.pc=0x0000020c87b86cc8 relative=0x0000000000000128
+Event: 0.999 Thread 0x0000020cf2e68b50 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000020c87b86cc8 method=jdk.internal.misc.Unsafe.allocateUninitializedArray(Ljava/lang/Class;I)Ljava/lang/Object; @ 51 c2
+Event: 0.999 Thread 0x0000020cf2e68b50 DEOPT PACKING pc=0x0000020c87b86cc8 sp=0x000000501b6fc7a0
+Event: 0.999 Thread 0x0000020cf2e68b50 DEOPT UNPACKING pc=0x0000020c875846a2 sp=0x000000501b6fc718 mode 2
+Event: 1.000 Thread 0x0000020cf2e68b50 Uncommon trap: trap_request=0xffffffde fr.pc=0x0000020c87b86cc8 relative=0x0000000000000128
+Event: 1.000 Thread 0x0000020cf2e68b50 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000020c87b86cc8 method=jdk.internal.misc.Unsafe.allocateUninitializedArray(Ljava/lang/Class;I)Ljava/lang/Object; @ 51 c2
+Event: 1.000 Thread 0x0000020cf2e68b50 DEOPT PACKING pc=0x0000020c87b86cc8 sp=0x000000501b6fcab0
+Event: 1.000 Thread 0x0000020cf2e68b50 DEOPT UNPACKING pc=0x0000020c875846a2 sp=0x000000501b6fca28 mode 2
+Event: 1.002 Thread 0x0000020cf2e68b50 Uncommon trap: trap_request=0xffffff45 fr.pc=0x0000020c87b7b038 relative=0x0000000000003138
+Event: 1.002 Thread 0x0000020cf2e68b50 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000020c87b7b038 method=java.nio.file.FileTreeWalker.visit(Ljava/nio/file/Path;ZZ)Ljava/nio/file/FileTreeWalker$Event; @ 53 c2
+Event: 1.002 Thread 0x0000020cf2e68b50 DEOPT PACKING pc=0x0000020c87b7b038 sp=0x000000501b6fce30
+Event: 1.002 Thread 0x0000020cf2e68b50 DEOPT UNPACKING pc=0x0000020c875846a2 sp=0x000000501b6fce00 mode 2
+Event: 1.002 Thread 0x0000020cf2e68b50 Uncommon trap: trap_request=0xffffffde fr.pc=0x0000020c87b86cc8 relative=0x0000000000000128
+Event: 1.002 Thread 0x0000020cf2e68b50 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000020c87b86cc8 method=jdk.internal.misc.Unsafe.allocateUninitializedArray(Ljava/lang/Class;I)Ljava/lang/Object; @ 51 c2
+Event: 1.002 Thread 0x0000020cf2e68b50 DEOPT PACKING pc=0x0000020c87b86cc8 sp=0x000000501b6fcd50
+Event: 1.002 Thread 0x0000020cf2e68b50 DEOPT UNPACKING pc=0x0000020c875846a2 sp=0x000000501b6fccc8 mode 2
+Event: 1.188 Thread 0x0000020cf2e68b50 Uncommon trap: trap_request=0xffffff45 fr.pc=0x0000020c87b558f0 relative=0x00000000000001d0
+Event: 1.188 Thread 0x0000020cf2e68b50 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000020c87b558f0 method=jdk.internal.util.ArraysSupport.mismatch([B[BI)I @ 38 c2
+Event: 1.188 Thread 0x0000020cf2e68b50 DEOPT PACKING pc=0x0000020c87b558f0 sp=0x000000501b6fd650
+Event: 1.188 Thread 0x0000020cf2e68b50 DEOPT UNPACKING pc=0x0000020c875846a2 sp=0x000000501b6fd618 mode 2
+
+Classes loaded (20 events):
+Event: 0.812 Loading class java/nio/file/Files$2
+Event: 0.812 Loading class java/nio/file/Files$2 done
+Event: 0.812 Loading class java/util/ImmutableCollections$Access
+Event: 0.812 Loading class java/util/ImmutableCollections$Access done
+Event: 0.813 Loading class java/util/ImmutableCollections$Access$1
+Event: 0.813 Loading class jdk/internal/access/JavaUtilCollectionAccess
+Event: 0.813 Loading class jdk/internal/access/JavaUtilCollectionAccess done
+Event: 0.813 Loading class java/util/ImmutableCollections$Access$1 done
+Event: 0.814 Loading class java/util/stream/Nodes$SpinedNodeBuilder
+Event: 0.814 Loading class java/util/stream/Nodes$SpinedNodeBuilder done
+Event: 0.818 Loading class java/lang/invoke/MethodHandle$1
+Event: 0.818 Loading class java/lang/invoke/MethodHandle$1 done
+Event: 0.891 Loading class java/nio/file/FileTreeWalker$1
+Event: 0.892 Loading class java/nio/file/FileTreeWalker$1 done
+Event: 0.954 Loading class java/util/LinkedList$Node
+Event: 0.955 Loading class java/util/LinkedList$Node done
+Event: 1.139 Loading class java/util/stream/ReduceOps$1
+Event: 1.139 Loading class java/util/stream/ReduceOps$1 done
+Event: 1.139 Loading class java/util/stream/ReduceOps$1ReducingSink
+Event: 1.139 Loading class java/util/stream/ReduceOps$1ReducingSink done
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 0.788 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007034d2b78}> (0x00000007034d2b78) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.789 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007034d3528}> (0x00000007034d3528) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.789 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007034d5648}> (0x00000007034d5648) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.789 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007034d5fc8}> (0x00000007034d5fc8) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.789 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007034d7d38}> (0x00000007034d7d38) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.789 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007034d8918}> (0x00000007034d8918) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.790 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007034da6c8}> (0x00000007034da6c8) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.790 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007034db078}> (0x00000007034db078) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.808 Thread 0x0000020cf2e68b50 Exception <a 'java/lang/NoSuchMethodError'{0x000000070322f450}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object)'> (0x000000070322f450) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 0.894 Thread 0x0000020cf2e68b50 Exception <a 'java/lang/NoSuchMethodError'{0x0000000702ee4510}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000702ee4510) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 0.899 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x0000000702eedc70}> (0x0000000702eedc70) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 0.931 Thread 0x0000020cf2e68b50 Exception <a 'java/lang/NoSuchMethodError'{0x0000000703126bf8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object, java.lang.Object, int, int)'> (0x0000000703126bf8) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 0.988 Thread 0x0000020cf2e68b50 Exception <a 'java/lang/NoSuchMethodError'{0x0000000703430500}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeInterface(java.lang.Object, java.lang.Object)'> (0x0000000703430500) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+Event: 1.002 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007035f1f90}> (0x00000007035f1f90) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 1.004 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x0000000703237d70}> (0x0000000703237d70) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 1.049 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007030f1498}> (0x00000007030f1498) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 1.050 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007031117d8}> (0x00000007031117d8) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 1.052 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x0000000703162168}> (0x0000000703162168) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 1.105 Thread 0x0000020cf2e68b50 Exception <a 'sun/nio/fs/WindowsException'{0x00000007035503a8}> (0x00000007035503a8) 
+thrown [s\open\src\hotspot\share\prims\jni.cpp, line 520]
+Event: 1.209 Thread 0x0000020cf2e68b50 Exception <a 'java/lang/NoSuchMethodError'{0x00000007031915d8}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000007031915d8) 
+thrown [s\open\src\hotspot\share\interpreter\linkResolver.cpp, line 774]
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (20 events):
+Event: 0.775 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause)
+Event: 0.777 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause) done
+Event: 0.783 Executing VM operation: G1PauseRemark
+Event: 0.784 Executing VM operation: G1PauseRemark done
+Event: 0.785 Executing VM operation: G1PauseCleanup
+Event: 0.785 Executing VM operation: G1PauseCleanup done
+Event: 0.904 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause)
+Event: 0.908 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause) done
+Event: 0.972 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause)
+Event: 0.977 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause) done
+Event: 1.083 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause)
+Event: 1.087 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause) done
+Event: 1.164 Executing VM operation: HandshakeAllThreads (Deoptimize)
+Event: 1.164 Executing VM operation: HandshakeAllThreads (Deoptimize) done
+Event: 1.168 Executing VM operation: HandshakeAllThreads (Deoptimize)
+Event: 1.168 Executing VM operation: HandshakeAllThreads (Deoptimize) done
+Event: 1.194 Executing VM operation: ICBufferFull
+Event: 1.194 Executing VM operation: ICBufferFull done
+Event: 1.213 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause)
+Event: 1.218 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause) done
+
+Events (13 events):
+Event: 0.027 Thread 0x0000020cf2e68b50 Thread added: 0x0000020cf2e68b50
+Event: 0.039 Thread 0x0000020cfedc5330 Thread added: 0x0000020cfedc5330
+Event: 0.039 Thread 0x0000020cfedc7060 Thread added: 0x0000020cfedc7060
+Event: 0.040 Thread 0x0000020cfedc8c30 Thread added: 0x0000020cfedc8c30
+Event: 0.040 Thread 0x0000020cfedca2c0 Thread added: 0x0000020cfedca2c0
+Event: 0.040 Thread 0x0000020cfedcb080 Thread added: 0x0000020cfedcb080
+Event: 0.040 Thread 0x0000020cfedcdaf0 Thread added: 0x0000020cfedcdaf0
+Event: 0.040 Thread 0x0000020cfedcf890 Thread added: 0x0000020cfedcf890
+Event: 0.040 Thread 0x0000020cfeddb850 Thread added: 0x0000020cfeddb850
+Event: 0.058 Thread 0x0000020cda14ac60 Thread added: 0x0000020cda14ac60
+Event: 0.073 Thread 0x0000020cda2da5d0 Thread added: 0x0000020cda2da5d0
+Event: 0.074 Thread 0x0000020cda2db8b0 Thread added: 0x0000020cda2db8b0
+Event: 0.514 Thread 0x0000020cdb972d80 Thread added: 0x0000020cdb972d80
+
+
+Dynamic libraries:
+0x00007ff7faa60000 - 0x00007ff7faa68000 	C:\Program Files\Java\jdk-22\bin\javac.exe
+0x00007ffeb63f0000 - 0x00007ffeb65e8000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffeb4ff0000 - 0x00007ffeb50b1000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffeb3c80000 - 0x00007ffeb3f7d000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffeb41f0000 - 0x00007ffeb42f0000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffeae4b0000 - 0x00007ffeae4c7000 	C:\Program Files\Java\jdk-22\bin\jli.dll
+0x00007ffeae7c0000 - 0x00007ffeae7db000 	C:\Program Files\Java\jdk-22\bin\VCRUNTIME140.dll
+0x00007ffeb5310000 - 0x00007ffeb53c0000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffeb4a50000 - 0x00007ffeb4aee000 	C:\Windows\System32\msvcrt.dll
+0x00007ffeb6310000 - 0x00007ffeb63b0000 	C:\Windows\System32\sechost.dll
+0x00007ffeb4830000 - 0x00007ffeb4953000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffeb3f80000 - 0x00007ffeb3fa7000 	C:\Windows\System32\bcrypt.dll
+0x00007ffeb4e50000 - 0x00007ffeb4fed000 	C:\Windows\System32\USER32.dll
+0x00007ffeb3fb0000 - 0x00007ffeb3fd2000 	C:\Windows\System32\win32u.dll
+0x00007ffe97180000 - 0x00007ffe9741a000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.4355_none_60b8b9eb71f62e16\COMCTL32.dll
+0x00007ffeb4d10000 - 0x00007ffeb4d3b000 	C:\Windows\System32\GDI32.dll
+0x00007ffeb3b60000 - 0x00007ffeb3c77000 	C:\Windows\System32\gdi32full.dll
+0x00007ffeb42f0000 - 0x00007ffeb438d000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffeae660000 - 0x00007ffeae66a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffeb62e0000 - 0x00007ffeb630f000 	C:\Windows\System32\IMM32.DLL
+0x00007ffeafcb0000 - 0x00007ffeafcbc000 	C:\Program Files\Java\jdk-22\bin\vcruntime140_1.dll
+0x00007ffe901a0000 - 0x00007ffe9022e000 	C:\Program Files\Java\jdk-22\bin\msvcp140.dll
+0x00007ffe766e0000 - 0x00007ffe77427000 	C:\Program Files\Java\jdk-22\bin\server\jvm.dll
+0x00007ffeb4b10000 - 0x00007ffeb4b7b000 	C:\Windows\System32\WS2_32.dll
+0x00007ffeb3020000 - 0x00007ffeb306b000 	C:\Windows\SYSTEM32\POWRPROF.dll
+0x00007ffea1900000 - 0x00007ffea1927000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffeb2e90000 - 0x00007ffeb2ea2000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007ffeb20f0000 - 0x00007ffeb2102000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ffeaf5d0000 - 0x00007ffeaf5da000 	C:\Program Files\Java\jdk-22\bin\jimage.dll
+0x00007ffeb1650000 - 0x00007ffeb1834000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffeaaf90000 - 0x00007ffeaafc4000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffeb4390000 - 0x00007ffeb4412000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffeae480000 - 0x00007ffeae49e000 	C:\Program Files\Java\jdk-22\bin\java.dll
+0x00007ffeb5630000 - 0x00007ffeb5d9f000 	C:\Windows\System32\SHELL32.dll
+0x00007ffeb4be0000 - 0x00007ffeb4d0b000 	C:\Windows\System32\ole32.dll
+0x00007ffeb44d0000 - 0x00007ffeb4823000 	C:\Windows\System32\combase.dll
+0x00007ffeb1920000 - 0x00007ffeb20bf000 	C:\Windows\SYSTEM32\windows.storage.dll
+0x00007ffeb34c0000 - 0x00007ffeb34ee000 	C:\Windows\SYSTEM32\Wldp.dll
+0x00007ffeb6210000 - 0x00007ffeb62dd000 	C:\Windows\System32\OLEAUT32.dll
+0x00007ffeb5260000 - 0x00007ffeb530d000 	C:\Windows\System32\SHCORE.dll
+0x00007ffeb4b80000 - 0x00007ffeb4bd5000 	C:\Windows\System32\shlwapi.dll
+0x00007ffeb39d0000 - 0x00007ffeb39f4000 	C:\Windows\SYSTEM32\profapi.dll
+0x00007ffe8fd00000 - 0x00007ffe8fdd7000 	C:\Program Files\Java\jdk-22\bin\jsvml.dll
+0x00007ffeae790000 - 0x00007ffeae7a0000 	C:\Program Files\Java\jdk-22\bin\net.dll
+0x00007ffeb3220000 - 0x00007ffeb328a000 	C:\Windows\system32\mswsock.dll
+0x00007ffeae460000 - 0x00007ffeae476000 	C:\Program Files\Java\jdk-22\bin\nio.dll
+0x00007ffeade60000 - 0x00007ffeade77000 	C:\Program Files\Java\jdk-22\bin\zip.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Java\jdk-22\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.4355_none_60b8b9eb71f62e16;C:\Program Files\Java\jdk-22\bin\server
+
+VM Arguments:
+jvm_args: -Dapplication.home=C:\Program Files\Java\jdk-22 --add-modules=ALL-DEFAULT -Xms8m -Djdk.module.main=jdk.compiler 
+java_command: jdk.compiler/com.sun.tools.javac.Main -cp lib/activation-1.1.1.jar;lib/antlr-2.7.7 (1).jar;lib/byte-buddy-1.10.22.jar;lib/classmate-1.5.1.jar;lib/dom4j-1.6.1 (1).jar;lib/hibernate-commons-annotations-5.1.2.Final.jar;lib/hibernate-core-5.6.0.Final.jar;lib/hibernate-jpa-2.1-api-1.0.2.Final.jar;lib/istack-commons-runtime-3.0.12.jar;lib/javax.persistence-api-2.2.jar;lib/jaxb-api-2.3.1.jar;lib/jaxb-impl-2.3.1.jar;lib/jboss-logging-3.3.2.Final (1).jar;lib/jboss-transaction-api_1.2_spec-1.1.1.Final (1).jar;lib/mysql-connector-j-8.3.0 (1).jar;lib/mysql-connector.jar; com/certificate/controller/*.java com/certificate/service/*.java com/certificate/dao/*.java com/model/*.java com/department/service/*.java com/department/dao/*.java com/department/controller/*.java com/employee/dao/*.java com/employee/service/*.java com/employee/controller/*.java com/employeeException/*.java com/util/*.java com/connectionManager/*.java com/bankDetail/service/*.java com/bankDetail/dao/*.java
+java_class_path (initial): <not set>
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+   size_t InitialHeapSize                          = 8388608                                   {product} {command line}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4263510016                                {product} {ergonomic}
+   size_t MaxNewSize                               = 2556428288                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {command line}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4263510016                             {manageable} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+PATH=C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\dharani.govindhasamy\AppData\Local\Microsoft\WindowsApps;C:\Users\dharani.govindhasamy\AppData\Local\Programs\Git\cmd
+USERNAME=dharani.govindhasamy
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
+TMP=C:\Users\DHARAN~1.GOV\AppData\Local\Temp
+TEMP=C:\Users\DHARAN~1.GOV\AppData\Local\Temp
+
+
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.4717)
+OS uptime: 5 days 20:01 hours
+
+CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 142 stepping 10 microcode 0xf4, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, rtm, adx, fma, vzeroupper, clflush, clflushopt, rdtscp, f16c
+Processor Information for processor 0
+  Max Mhz: 1896, Current Mhz: 1496, Mhz Limit: 1687
+Processor Information for processor 1
+  Max Mhz: 1896, Current Mhz: 1496, Mhz Limit: 1687
+Processor Information for processor 2
+  Max Mhz: 1896, Current Mhz: 1496, Mhz Limit: 1687
+Processor Information for processor 3
+  Max Mhz: 1896, Current Mhz: 1496, Mhz Limit: 1687
+Processor Information for processor 4
+  Max Mhz: 1896, Current Mhz: 1496, Mhz Limit: 1687
+Processor Information for processor 5
+  Max Mhz: 1896, Current Mhz: 1496, Mhz Limit: 1687
+Processor Information for processor 6
+  Max Mhz: 1896, Current Mhz: 1696, Mhz Limit: 1687
+Processor Information for processor 7
+  Max Mhz: 1896, Current Mhz: 1496, Mhz Limit: 1687
+
+Memory: 4k page, system-wide physical 16258M (8610M free)
+TotalPageFile size 18690M (AvailPageFile size 7900M)
+current process WorkingSet (physical memory assigned to process): 112M, peak: 112M
+current process commit charge ("private bytes"): 145M, peak: 145M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (22.0.1+8-16) for windows-amd64 JRE (22.0.1+8-16), built on 2024-03-12T10:33:16Z by "mach5one" with MS VC++ 17.6 (VS2022)
+
+END.
