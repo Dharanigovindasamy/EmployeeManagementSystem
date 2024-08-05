@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">  
+
+<hibernate-mapping>
+   <class name = "com.model.Certificate" table = "certificates">
+   <id name ="certificateId" type = "integer" column = "certificate_id">
+      <generator class = "increment"></generator>
+   </id>
+
+   <property name = "certificateName" column = "certificate_name" type = "string"/>
+   <property name = "isRemoved" column = "is_removed" type = "boolean"/>
+   <set name = "employees"  table = "employee_certificate" cascade = "all" lazy = "false">
+      <key column ="certificate_id"/>
+      <many-to-many column = "employee_id" class = "com.model.Employee"/>
+   </set>
+   </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd"> 
+
+<hibernate-mapping>
+   <class name = "com.model.Employee" table = "employees">
+      <id name = "employeeId" type = "integer" column = "id">
+         <generator class = "increment"></generator>
+      </id>
+
+      <property name = "employeeName" column = "name" type = "string"/>
+      <property name = "employeeDOB" column = "employee_dob" type = "java.time.LocalDate"/>
+      <property name = "contactNumber" column = "contact_number" type = "long"/>
+      <property name = "mailId" column = "mail_id" type = "string"/>
+      <property name = "experience" column = "experience" type = "integer"/>
+      <many-to-one name = "department" class = "com.model.Department" column = "department_id" not-null = "true" cascade = "save-update" lazy = "false" />
+      <property name = "salary" column = "salary" type = "double"/>
+      <property name = "city" column = "city" type ="string"/>
+      <property name = "isRemoved" column = "is_removed" type = "boolean"/>
+      <set name = "certificates" table = "employee_certificate" inverse = "true" cascade = "all" lazy = "false">
+         <key column = "employee_id" />
+         <many-to-many column = "certificate_id" class = "com.model.Certificate"/>
+      </set>
+   </class>
+
+</hibernate-mapping>
