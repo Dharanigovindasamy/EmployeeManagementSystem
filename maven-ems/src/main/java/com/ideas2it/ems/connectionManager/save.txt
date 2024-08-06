@@ -1,0 +1,591 @@
+package com.employee.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.query.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.connectionManager.HibernateConnection;
+import com.model.Certificate;
+import com.model.Department;
+import com.model.Employee;
+import com.employeeException.EmployeeException;
+
+/**
+ * This class manages employee data.
+ * Connects employee to the database and performs operations like adding, viewing, updating, and deleting.
+ */
+public class EmployeeDaoImpl implements EmployeeDao {
+
+    @Override
+    public boolean addEmployee(Employee employee) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Integer id = (Integer) session.save(employee);
+            transaction.commit();
+            return id > 0;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to add the employee: " + employee.getEmployeeId(), e);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        List<Employee> employees = new ArrayList<>();
+        try {
+            transaction = session.beginTransaction();
+            Query<Employee> query = session.createQuery("FROM Employee WHERE isRemoved = :isRemoved", Employee.class);
+            query.setParameter("isRemoved", false);
+            employees = query.list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to get all the employees", e);
+        } finally {
+            session.close();
+        }
+        return employees;
+    }
+
+    @Override
+    public Employee getEmployeeById(int employeeId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        Employee employee = null;
+        try {
+            transaction = session.beginTransaction();
+            employee = session.get(Employee.class, employeeId);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to get employee by ID: " + employeeId, e);
+        } finally {
+            session.close();
+        }
+        return employee;
+    }
+
+    @Override
+    public void updateEmployee(Employee updatedEmployee) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.saveOrupdate(updatedEmployee);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to update the employee: " + updatedEmployee.getEmployeeId(), e);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void deleteEmployee(int employeeId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("UPDATE Employee SET isRemoved = :isRemoved WHERE id = :employeeId");
+            query.setParameter("isRemoved", true);
+            query.setParameter("employeeId", employeeId);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to delete the employee: " + employeeId, e);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public Department getDepartmentByEmployeeId(int employeeId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        Department department = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("SELECT e.department FROM Employee e WHERE e.id = :employeeId AND e.isRemoved = false");
+            query.setParameter("employeeId", employeeId);
+            department = (Department) query.uniqueResult();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to get department by employee ID: " + employeeId, e);
+        } finally {
+            session.close();
+        }
+        return department;
+    }
+
+    @Override
+    public List<Certificate> getCertificatesByEmployeeId(int employeeId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        List<Certificate> certificates = new ArrayList<>();
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("SELECT c FROM Certificate c JOIN c.employees e WHERE e.id = :employeeId");
+            query.setParameter("employeeId", employeeId);
+            certificates = query.list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to get certificates by employee ID: " + employeeId, e);
+        } finally {
+            session.close();
+        }
+        return certificates;
+    }
+}
+
+
+-------------
+employeeDaoImpl
+
+package com.employee.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Hibernate;
+import org.hibernate.HibernteException;
+import org.hibernate.query.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.connectionManager.ConnectionManager;
+import com.connectionManager.HibernateConnection;
+import com.model.Certificate;
+import com.model.Department;
+import com.model.Employee;
+import com.employee.dao.EmployeeDao;
+import com.employeeException.EmployeeException;
+import com.util.Validator;
+
+/**
+ * This class manages employee data.
+ * Connect employee into the database and perform such operations like adding, viewing, updating and deleting
+ */
+public class EmployeeDaoImpl implements EmployeeDao {
+    Connection connection = null;
+    
+    @Override
+    public boolean addEmployee(Employee employee) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Integer id = (Integer) session.save(employee);
+            if(id > 0) {
+                return true;
+            }
+            transaction.commit(); 
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to add th employee : " + employee.getEmployeeId() , e);
+        } finally {
+            session.close();
+        }
+        return false;
+    }
+   
+    @Override 
+    public List<Employee> getAllEmployees() throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        List<Employee> employee = null;
+        try {
+            transaction = session.beginTransaction();
+            Query<Employee> query = session.createQuery("FROM Employee WHERE is_removed = :isRemoved" , Employee.class)
+                                           .setParamater("is_removed", false);
+            employee = query.list();
+            transaction.commit(); 
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to get all the employees : " , e);
+        } finally {
+            session.close();
+        }
+    }      
+
+    @Override
+    public Employee getEmployeeById(int employeeId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        Employee employee = null;
+        try {
+            transaction = session.beginTransaction();
+            Employee employee = session.get(Employee.class , id);
+            transaction.commit(); 
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to get employee id: " + employee.getEmployeeId() , e);
+        } finally {
+            session.close();
+        }
+    }    
+        
+    @Override
+    public boolean updateEmployee(Employee updatedEmployee) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+             Integer id = (Integer) session.saveOrUpdate(employee);
+            if(id > 0) {
+                return true;
+            }
+            transaction.commit(); 
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to update the employee : " + employee.getEmployeeId() , e);
+        } finally {
+            session.close();
+        }  
+        return false;     
+    }
+
+    @Override
+    public void deleteEmployee(int employeeId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transcation = null;
+        try {
+            transaction = session.beginTransaction();
+            Query<Employee> query = session.createQuery("UPDATE Employee SET is_removed = :isRemoved where id = :employeeId");
+            query.setParameter("is_removed", true);
+            query.setParameter("id", employeeId);
+            transaction.commit(); 
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to delete the employee : " + employee.getEmployeeId() , e);
+        } finally {
+            session.close();
+        }     
+    }
+    
+    @Override
+    public Department getDepartmentByEmployeeId(int employeeId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transcation = null;
+        try {
+            transaction = session.beginTransaction();
+
+            connection = ConnectionManager.getConnection();
+            String employeeQuery = "SELECT department_id FROM employees WHERE is_removed = 0 AND id = ?";
+            statement = connection.prepareStatement(employeeQuery);
+            statement.setInt(1, employeeId);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int departmentId = resultSet.getInt("department_id");
+                String departmentQuery = "SELECT department_name FROM departments WHERE id = ?";
+                statement = connection.prepareStatement(departmentQuery);
+                statement.setInt(1, departmentId);
+                resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    String departmentName = resultSet.getString("department_name");
+                    department = new Department(departmentId, departmentName);
+                } else {
+                    System.out.println("No department found for department ID: " + departmentId);
+                }
+            } else {
+                System.out.println("No employee found with ID: " + employeeId);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL exception: " + e.getMessage());
+            throw new EmployeeException("Unable to get department by employee ID: " + employeeId , e);
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) ConnectionManager.closeConnection();
+            } catch (SQLException e) {
+                System.out.println("SQL exception while closing resources: " + e.getMessage());
+            }
+        }
+        return department;
+    }
+
+    @Override
+    public List<Certificate> getCertificatesByEmployeeId(int employeeId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transcation = null;
+        try {
+            transaction = session.beginTransaction();
+
+            String query = "select e.certificate_id, c.certificate_name from employee_certificate e inner join certificates c on e.certificate_id  = c.certificate_id where e.employee_id = " + employeeId;
+            statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            certificates = new ArrayList<>();
+            while(resultSet.next()) {
+                int certificateId = resultSet.getInt("certificate_id");
+                String certificateName = resultSet.getString("certificate_name");
+                Certificate certificate = new Certificate(certificateId, certificateName);
+                certificates.add(certificate);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new EmployeeException("Unable to display certificate in employee id: " + employeeId , e);
+        } finally {
+            try {
+                if(statement !=null & connection != null) {
+                    statement.close();
+                    ConnectionManager.closeConnection();
+                }
+            } catch (SQLException e) {
+                System.out.println("SQL exception occurs");
+            }    
+        } 
+        return certificates;
+    }
+}
+
+
+
+-------
+departmentDapImpl
+-----
+
+package com.department.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.DriverManager;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.time.LocalDate;
+
+import com.connectionManager.ConnectionManager;
+import com.connectionManager.HibernateConnection;
+import com.model.Department;
+import com.department.dao.DepartmentDao;
+import com.employeeException.EmployeeException;
+import com.model.Employee;
+
+/**
+* This class used to manage department objects.
+* Also here, connected with database and execute table operations 
+*/
+public class DepartmentDaoImpl implements DepartmentDao {
+    
+    @Override
+    public boolean addDepartment(Department department) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Integer id = (Integer) session.save(department);
+            if(id > 0) {
+                return true;
+            }
+            transaction.commit(); 
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to add the department : " + department.getDepartmentId() , e);
+        } finally {
+            session.close();
+        }
+        return false;
+    }
+
+    @Override
+    public List<Department> getAllDepartments() throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        List<Department> departments = new ArrayList<>();
+        try {
+            transaction = session.beginTransaction();
+            Query<Department> query = session.createQuery("FROM Department WHERE is_removed = :isRemoved " , Department.class)
+                                           .setParamater("is_removed", false);
+            departments = query.list();
+            transaction.commit(); 
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to get all the departments : " , e);
+        } finally {
+            session.close();
+        }    
+        return departments;
+    }
+
+    @Override
+    public Department getDepartmentById(int departmentId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        Department department = null;
+        try {
+            transaction = session.beginTransaction();
+            department = session.get(Department.class , id);
+            transaction.commit(); 
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to get department by: " + DepartmentId() , e);
+        } finally {
+            session.close();
+        }
+        return department;
+    }
+    
+    @Override
+    public String getDepartmentName(int departmentId) throws EmployeeException {
+        connection = ConnectionManager.getConnection();
+        PreparedStatement statement = null;
+        String departmentName = "";
+        try {
+            String query = "select department_name from departments where is_removed = 0 and id = " + departmentId;
+            statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                departmentName = resultSet.getString("name");
+            }
+        } catch (Exception e) {
+            System.out.println("unable to get the departmentName" + e.getMessage());
+            throw new EmployeeException("Unable to display in department: " + departmentId , e);
+        } finally {
+            try {
+                if(statement !=null & connection != null) {
+                    statement.close();
+                    ConnectionManager.closeConnection();
+                }
+            } catch (SQLException e) {
+                System.out.println("SQL exception occurs");
+            }    
+        }
+        return departmentName;
+    }
+    
+    @Override
+    public List<Employee> getEmployeesByDepartmentId(int departmentId) throws EmployeeException {
+        Connection connection = ConnectionManager.getConnection();
+        PreparedStatement statement = null;
+        List<Employee> employees = null;
+        try {
+            String query = "select e.id, e.name , e.employee_dob, e.contact_number, e.mail_id, e.experience, e.salary, e.city, e.department_id, department_name from employees e left join departments d on e.department_id = d.id where e.is_removed = 0 and e.department_id = " + departmentId;
+            statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            employees = new ArrayList<>();
+            while (resultSet.next()) {
+                int employeeId = resultSet.getInt("e.id");
+                String employeeName = resultSet.getString("e.name");
+                Date date = resultSet.getDate("e.employee_dob");
+                LocalDate birthDate = date.toLocalDate();
+                departmentId = resultSet.getInt("department_id");
+                String departmentName = resultSet.getString("department_name");
+                Department department = new Department(departmentId, departmentName);
+                Long contactNumber = resultSet.getLong("e.contact_number");
+                String mailId = resultSet.getString("e.mail_id");
+                int experience = resultSet.getInt("e.experience");
+                Double salary = resultSet.getDouble("e.salary");
+                String city = resultSet.getString("e.city");
+                Employee employee = new Employee(employeeId, employeeName, birthDate, contactNumber, mailId, experience, salary, city, department);
+                employees.add(employee);
+            } 
+        } catch (Exception e) {
+            System.out.println("Unable to get employees" + e.getMessage());
+            throw new EmployeeException("Unable to get employee" + departmentId, e);
+        } finally {
+            try {
+                if(statement !=null & connection != null) {
+                    statement.close();
+                    ConnectionManager.closeConnection();
+                }
+            } catch (SQLException e) {
+                System.out.println("SQL exception occurs");
+            }    
+        }
+         return employees;
+    }   
+
+    @Override
+    public void updateDepartment(int departmentId, String departmentName) throws EmployeeException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionManager.getConnection();
+            String query = "update departments set department_name = ? where is_removed = 0 and id = " + departmentId;
+            statement = connection.prepareStatement(query);
+            statement.setString(1, departmentName);
+            statement.execute();
+        } catch (Exception e) {
+            System.out.println("Unable to update department Name" + e.getMessage());
+            throw new EmployeeException("Unable to update department Id in departments: " + departmentId, e);
+        } finally {
+            try {
+                if(statement !=null & connection != null) {
+                    statement.close();
+                    ConnectionManager.closeConnection();
+                }
+            } catch (SQLException e) {
+                System.out.println("SQL exception occurs");
+            }    
+        }
+    }
+    
+    @Override 
+    public void deleteDepartment(int departmentId) throws EmployeeException {
+        Session session = HibernateConnection.getFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query<Department> query = session.createQuery("UPDATE Department SET is_removed = :isRemoved where id = :departmentId");
+            query.setParameter("isRemoved", true);
+            query.setParameter("departmentId", departmentId);
+            query.executeUpdate();
+            transaction.commit(); 
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new EmployeeException("Unable to delete the department : " + employee.getEmployeeId() , e);
+        } finally {
+            session.close();
+        }    
+    }
+}
+

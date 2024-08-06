@@ -1,0 +1,40 @@
+[INFO ] 2024-08-06 12:52:15.283 [EmployeeManagementSystem.main()] EmployeeController - Add Employee Records
+[INFO ] 2024-08-06 12:52:44.539 [EmployeeManagementSystem.main()] Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+[INFO ] 2024-08-06 12:52:45.119 [EmployeeManagementSystem.main()] Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[WARN ] 2024-08-06 12:52:45.227 [EmployeeManagementSystem.main()] pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+[INFO ] 2024-08-06 12:52:45.238 [EmployeeManagementSystem.main()] pooling - HHH10001005: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost/employeeManagement]
+[INFO ] 2024-08-06 12:52:45.239 [EmployeeManagementSystem.main()] pooling - HHH10001001: Connection properties: {user=root}
+[INFO ] 2024-08-06 12:52:45.239 [EmployeeManagementSystem.main()] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 2024-08-06 12:52:45.244 [EmployeeManagementSystem.main()] DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+[INFO ] 2024-08-06 12:52:45.443 [EmployeeManagementSystem.main()] Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2024-08-06 12:52:45.503 [EmployeeManagementSystem.main()] pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost/employeeManagement]
+[INFO ] 2024-08-06 12:57:29.899 [EmployeeManagementSystem.main()] EmployeeController - Add Employee Records
+[INFO ] 2024-08-06 12:58:01.093 [EmployeeManagementSystem.main()] Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+[INFO ] 2024-08-06 12:58:01.554 [EmployeeManagementSystem.main()] Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[WARN ] 2024-08-06 12:58:01.698 [EmployeeManagementSystem.main()] pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+[INFO ] 2024-08-06 12:58:01.710 [EmployeeManagementSystem.main()] pooling - HHH10001005: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost/employeeManagement]
+[INFO ] 2024-08-06 12:58:01.712 [EmployeeManagementSystem.main()] pooling - HHH10001001: Connection properties: {user=root}
+[INFO ] 2024-08-06 12:58:01.712 [EmployeeManagementSystem.main()] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 2024-08-06 12:58:01.717 [EmployeeManagementSystem.main()] DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+[INFO ] 2024-08-06 12:58:02.000 [EmployeeManagementSystem.main()] Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2024-08-06 12:58:02.837 [EmployeeManagementSystem.main()] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7bf182ad] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 2024-08-06 12:58:03.026 [EmployeeManagementSystem.main()] JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 2024-08-06 12:58:03.144 [EmployeeManagementSystem.main()] EmployeeController - Bank Details added successfully
+[INFO ] 2024-08-06 12:58:05.980 [EmployeeManagementSystem.main()] EmployeeController - Employee added successfully.
+[INFO ] 2024-08-06 12:58:22.370 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.381 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.389 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.415 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.438 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.468 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.498 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.521 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.561 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.584 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.593 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.606 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.610 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.639 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.653 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.685 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
+[INFO ] 2024-08-06 12:58:22.713 [EmployeeManagementSystem.main()] EmployeeController - Displayed successfully
