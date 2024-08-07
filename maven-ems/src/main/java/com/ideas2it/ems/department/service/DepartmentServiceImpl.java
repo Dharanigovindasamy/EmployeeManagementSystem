@@ -5,7 +5,6 @@ import java.util.List;
 import com.ideas2it.ems.department.dao.DepartmentDao;
 import com.ideas2it.ems.department.dao.DepartmentDaoImpl;
 import com.ideas2it.ems.model.Department;
-import com.ideas2it.ems.department.service.DepartmentService;
 import com.ideas2it.ems.model.Employee;
 import com.ideas2it.ems.exception.EmployeeException;
 
@@ -52,9 +51,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public boolean isPresentDepartment(int departmentId) throws EmployeeException {
         Department department = departmentDao.getDepartmentById(departmentId);
-            if(null == department) {
-                return false;
-            }  
-        return true;
+        return null != department;
     }
 }

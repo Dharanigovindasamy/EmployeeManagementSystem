@@ -4,10 +4,8 @@ import java.util.List;
 
 import com.ideas2it.ems.bankDetail.dao.BankDetailDao;
 import com.ideas2it.ems.bankDetail.dao.BankDetailDaoImpl;
-import com.ideas2it.ems.bankDetail.service.BankDetailService;
 import com.ideas2it.ems.exception.EmployeeException;
 import com.ideas2it.ems.model.BankDetail;
-import com.ideas2it.ems.model.Employee;
 
 /**
  * <p>Service class for managing bank details-related operations.</p>

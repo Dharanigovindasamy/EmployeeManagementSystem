@@ -1,6 +1,5 @@
 package com.ideas2it.ems.employee.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -11,15 +10,12 @@ import org.apache.logging.log4j.LogManager;
 
 import com.ideas2it.ems.bankDetail.service.BankDetailService;
 import com.ideas2it.ems.bankDetail.service.BankDetailServiceImpl;
-import com.ideas2it.ems.certificate.service.CertificateService;
-import com.ideas2it.ems.certificate.service.CertificateServiceImpl;
 import com.ideas2it.ems.department.service.DepartmentService;
 import com.ideas2it.ems.department.service.DepartmentServiceImpl;
 import com.ideas2it.ems.employee.service.EmployeeService;
 import com.ideas2it.ems.employee.service.EmployeeServiceImpl;
 import com.ideas2it.ems.exception.EmployeeException;
 import com.ideas2it.ems.model.BankDetail;
-import com.ideas2it.ems.model.Certificate;
 import com.ideas2it.ems.model.Department;
 import com.ideas2it.ems.model.Employee;
 import com.ideas2it.ems.util.Validator;
@@ -34,14 +30,13 @@ import com.ideas2it.ems.util.Validator;
 public class EmployeeController {
     Scanner input = new Scanner(System.in);
     EmployeeService employeeService = new EmployeeServiceImpl();
-    CertificateService certificateService = new CertificateServiceImpl();
     DepartmentService departmentService = new DepartmentServiceImpl();
     BankDetailService bankDetailService = new BankDetailServiceImpl();
 
-    private static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
 
     /**
-    * The functions is for employee options
+    * The functions are for employee options
     */
 
     public void getEmployeeDetails() {
@@ -93,141 +88,17 @@ public class EmployeeController {
     */
     public void addEmployee() {
         logger.info("Add Employee Records");
-        boolean isFlag = true; 
-        String employeeName = " ";
-        while(isFlag) {
-            System.out.println("Enter the Employee Name");
-            employeeName = input.nextLine();
-            try {
-                if(Validator.isValidAlphabet(employeeName)) {
-                    isFlag = false;
-                }
-            } catch(InputMismatchException e) {
-                logger.error("Invalid.Enter valid Name", e.getMessage());
-            }
-        } 
-        isFlag = true;
-        boolean isActive = true;
-        LocalDate employeeDOB = null; 
-        int age = 0;
-        while (isActive) {
-            System.out.println("Enter DOB in yyyy-mm-dd format.");
-            String dobString = input.nextLine();
-            try {
-                employeeDOB = Validator.parseDate(dobString);
-                age = Validator.calculateAge(employeeDOB);
-                System.out.println("Employee's age: " + age);
-                isActive = false;
-            } catch (IllegalArgumentException e) {
-                logger.error("Enter valid date of birth ", e.getMessage());
-            }
-        }
-        isActive = true;
-        boolean isFound = true;
-        long contactNumber = 0;
-        while(isFound) {
-            System.out.println("Enter the Employee Contact Number");
-            contactNumber = input.nextLong();
-            String contactNumberString = String.valueOf(contactNumber);
-            try {
-                if (Validator.isValidContact(contactNumberString)) {
-                    isFound = false;
-                }
-            } catch(InputMismatchException e) {
-                logger.error("Enter the valid Contact Number ", e.getMessage());
-            }   
-        } 
-        isFound = true;
 
-        boolean isMail = true;
-        input.nextLine();
-        String mailId = " ";                
-        while(isMail) {
-            System.out.println("Enter the Employee Mail ID");
-            mailId = input.nextLine();
-            try {
-                if(Validator.isValidMail(mailId)) {
-                    isMail = false;
-                }
-            } catch(Exception e) {
-                logger.error("Enter the valid Employee mail ID", e.getMessage());
-                input.nextLine();  
-            }
-        }
-        isMail = true;
-        int experience = 0;
-        boolean isExperienceCheck = true;
-        while (isExperienceCheck) {
-            try {
-                System.out.println("Enter the Employee Experience (0 to 30):");
-                experience = input.nextInt();
-                if (experience < 0 || experience > 30) {
-                    System.out.println("Invalid input. Please enter a number between 0 and 30.");
-                } else {
-                    isExperienceCheck = false; 
-                }
-            } catch (Exception e) {
-                logger.error("Invalid input. Please enter a valid integer.", e.getMessage());
-                input.next(); 
-            }
-        }
-
-        double salary = 0.00;
-        boolean isSalaryCheck = true;
-        while(isSalaryCheck) {
-            try{
-                System.out.println("Enter the Employee Salary");
-                salary = input.nextDouble();
-                isSalaryCheck = false;
-            } catch (Exception e) {
-                logger.error("Invalid.Enter valid salary", e.getMessage());
-                input.next();  
-            }
-        }
-        isSalaryCheck = true;
-        boolean isCityCheck = true;
-        String city = " ";
-        while(isCityCheck) {
-            System.out.println("Enter the Employee City");
-            city = input.nextLine();
-            try {
-                if(Validator.isValidAlphabet(city)) {
-                    isCityCheck = false;
-                }
-            } catch(InputMismatchException e) {
-                logger.error("Enter the valid Employee city", e.getMessage());
-            }
-        } 
-        isCityCheck = true;
-
+        String employeeName = addName();
+        LocalDate employeeDOB = addDOB();
+        long contactNumber = addContactNumber();
+        String mailId = addMailId();
+        int experience = addExperience();
+        double salary = addSalary();
+        String city = addCity();
         System.out.println("Enter the bank details: ");
-        long accountNumber = 0;
-        boolean isValidInput = false;
-        while (!isValidInput) {
-            System.out.println("Enter employee account number:");
-            try {
-                accountNumber = input.nextLong();
-                isValidInput = true; 
-            } catch (InputMismatchException e) {
-                logger.error("Invalid input. Please enter a valid numeric account number.", e.getMessage());
-                input.next(); 
-            }
-        }
-       
-        String branch = " ";
-        boolean isString = true;
-        while(isString) {
-            System.out.println("Enter branch details");
-            branch = input.nextLine();
-            try {
-                if(Validator.isValidAlphabet(branch)) {
-                    isString = false;
-                }
-            } catch(InputMismatchException e) {
-                logger.error("Invalid.Enter valid branch", e.getMessage());
-            }
-        } 
-        isString = true;
+        long accountNumber = addAccountNumber();
+        String branch = addBranch();
        
         try {
             bankDetailService.addBankDetail(accountNumber, branch);
@@ -251,14 +122,174 @@ public class EmployeeController {
                     departmentId = input.nextInt();
                 } 
                 employeeService.addEmployee(employeeName, employeeDOB, contactNumber, mailId, experience, salary, city, departmentId, accountNumber, branch);
-                logger.info("Employee added successfully." + employeeName);
+                logger.info("Employee added successfully.{}", employeeName);
             }
         } catch (EmployeeException e) {
-            logger.info("Error while adding employee details" + e.getMessage());
+           logger.info("Error while adding employee details{}", e.getMessage());
         }
     }
 
-   
+    private String addMailId() {
+        boolean isMail = true;
+        input.nextLine();
+        String mailId = " ";
+        while(isMail) {
+            System.out.println("Enter the Employee Mail ID");
+            mailId = input.nextLine();
+            try {
+                if(Validator.isValidMail(mailId)) isMail = false;
+            } catch(Exception e) {
+                logger.error("Enter the valid Employee mail ID {}", e.getMessage());
+                input.nextLine();
+            }
+        }
+        return mailId;
+    }
+
+    private long addContactNumber() {
+        boolean isFound = true;
+        long contactNumber = 0;
+        while(isFound) {
+            System.out.println("Enter the Employee Contact Number");
+            contactNumber = input.nextLong();
+            String contactNumberString = String.valueOf(contactNumber);
+            try {
+                if (Validator.isValidContact(contactNumberString)) {
+                    isFound = false;
+                }
+            } catch(InputMismatchException e) {
+                logger.error("Enter the valid Contact Number {}", e.getMessage());
+            }
+        }
+        return contactNumber;
+    }
+
+    private LocalDate addDOB() {
+        boolean isActive = true;
+        LocalDate employeeDOB = null;
+        int age;
+        while (isActive) {
+            System.out.println("Enter DOB in yyyy-mm-dd format.");
+            String dobString = input.nextLine();
+            try {
+                employeeDOB = Validator.parseDate(dobString);
+                age = Validator.calculateAge(employeeDOB);
+                System.out.println("Employee's age: " + age);
+                isActive = false;
+            } catch (IllegalArgumentException e) {
+                logger.error("Enter valid date of birth {} ", e.getMessage());
+            }
+        }
+        return employeeDOB;
+    }
+
+    public String addName() {
+        String employeeName = " ";
+        boolean isFlag = true;
+        while (isFlag) {
+            System.out.println("Enter the Employee Name");
+            employeeName = input.nextLine();
+            try {
+                if (Validator.isValidAlphabet(employeeName)) {
+                    isFlag = false;
+                }
+            } catch (InputMismatchException e) {
+                logger.error("Invalid.Enter valid Name {} ", e.getMessage());
+            }
+        }
+        return employeeName;
+    }
+
+    public int addExperience() {
+        int experience = 0;
+        boolean isExperienceCheck = true;
+        while (isExperienceCheck) {
+            try {
+                System.out.println("Enter the Employee Experience (0 to 30):");
+                experience = input.nextInt();
+                if (experience < 0 || experience > 30) {
+                    System.out.println("Invalid input. Please enter a number between 0 and 30.");
+                } else {
+                    isExperienceCheck = false;
+                }
+            } catch (Exception e) {
+                logger.error("Invalid input. Please enter a valid integer. {}", e.getMessage());
+                input.next();
+            }
+        }
+        return experience;
+    }
+
+    public Double addSalary() {
+        double salary = 0.00;
+        boolean isSalaryCheck = true;
+        while(isSalaryCheck) {
+            try{
+                System.out.println("Enter the Employee Salary");
+                salary = input.nextDouble();
+                isSalaryCheck = false;
+            } catch (Exception e) {
+                logger.error("Invalid.Enter valid salary {} ", e.getMessage());
+                input.next();
+            }
+        }
+        input.nextLine();
+        return salary;
+    }
+
+    public String addCity() {
+
+        boolean isCityCheck = true;
+        String city = " ";
+        while(isCityCheck) {
+            System.out.println("Enter the Employee City");
+            city = input.nextLine();
+            try {
+                if(Validator.isValidAlphabet(city)) {
+                    isCityCheck = false;
+                }
+            } catch(InputMismatchException e) {
+                logger.error("Enter the valid Employee city {} ", e.getMessage());
+            }
+        }
+        return city;
+    }
+
+    public long addAccountNumber() {
+        long accountNumber = 0;
+        boolean isValidInput = false;
+        while (!isValidInput) {
+            System.out.println("Enter employee account number:");
+            try {
+                accountNumber = input.nextLong();
+                isValidInput = true;
+            } catch (InputMismatchException e) {
+                logger.error("Invalid input. Please enter a valid numeric account number. {}", e.getMessage());
+                input.next();
+            }
+        }
+        input.nextLine();
+        return accountNumber;
+    }
+
+    public String addBranch() {
+        String branch = " ";
+        boolean isString = true;
+        while(isString) {
+            System.out.println("Enter branch details");
+            branch = input.nextLine();
+            try {
+                if(Validator.isValidAlphabet(branch)) {
+                    isString = false;
+                }
+            } catch(InputMismatchException e) {
+                logger.error("Invalid.Enter valid branch {}", e.getMessage());
+            }
+        }
+        return branch;
+    }
+
+
     /**
     * <p>Display all employees present in employee list
     * if employee is empty, gives warn,if there is error shows exception
@@ -291,8 +322,6 @@ public class EmployeeController {
             }
         } catch (EmployeeException e) {
             logger.error(e.getMessage());
-        } catch (Exception e) {
-            logger.error(e.getMessage());
         }
    }    
 
@@ -324,10 +353,10 @@ public class EmployeeController {
                                   employee.getDepartment().getDepartmentName(),
                                   employee.getBankDetail());
                 System.out.println(new String(new char[150]).replace("\0", "-"));
-                logger.info("Display employee detils by employee id");
+                logger.info("Display employee details by employee id{}", employeeId);
             }
         } catch (EmployeeException e) {
-            logger.error("Error while displaying employee details", e.getMessage());
+            logger.error("Error while displaying employee details {} ", e.getMessage());
         }
     }
 
@@ -347,11 +376,11 @@ public class EmployeeController {
                 System.out.println("Employee Id exists ");
                 updateOperations(employee);
                 employeeService.updateEmployee(employee);
-                logger.info("Employee updated successfully.");
+                logger.info("Employee updated successfully.{}", employeeId);
                 System.out.println("-----------------------------");
             }
         } catch (EmployeeException e) {
-            logger.error("Error while updating employee details", e.getMessage());
+            logger.error("Error while updating employee details {} {}", e.getMessage(), employeeId);
         }
     }
 
@@ -364,11 +393,15 @@ public class EmployeeController {
         System.out.print("Enter Employee ID: ");
         int employeeId = input.nextInt();
         try {
-            employeeService.deleteEmployee(employeeId);
-            logger.info("Employee deleted successfully.");
-            System.out.println("-----------------------------");
+            if (employeeService.deleteEmployee(employeeId)) {
+                logger.info("Employee deleted successfully.{}", employeeId);
+                System.out.println("-----------------------------");
+            } else {
+                logger.warn("Employee Id does not exist {}", employeeId);
+            }
+
         } catch (EmployeeException e) {
-            logger.error("Error while deleting employee details", e.getMessage());
+            logger.error("Error while deleting employee details {} {}", employeeId, e.getMessage());
         }
     }
    
@@ -388,36 +421,29 @@ public class EmployeeController {
             
         switch (updateOption) {
         case 1 :
-            input.nextLine(); 
-            System.out.print("Enter Employee Name: ");
-            String employeeName = input.nextLine();
+            input.nextLine();
+            String employeeName = addName();
             employee.setEmployeeName(employeeName);
             break;
         case 2:
-            System.out.print("Enter Employee Contact Number: ");
-            long contactNumber = input.nextLong();
+            long contactNumber = addContactNumber();
             employee.setContactNumber(contactNumber);
             break;
         case 3 :
-            input.nextLine(); 
-            System.out.print("Enter Employee Mail ID: ");
-            String mailId = input.nextLine();
+            String mailId = addMailId();
             employee.setMailId(mailId);
             break;
         case 4 :
-            System.out.print("Enter Employee Experience: ");
-            int experience = input.nextInt();
+            int experience = addExperience();
             employee.setExperience(experience);
             break;
         case 5 :
-            System.out.print("Enter Employee Salary: ");
-            double salary = input.nextDouble();
+            double salary = addSalary();
             employee.setSalary(salary); 
             break;
         case 6 :
-            input.nextLine(); 
-            System.out.print("Enter Employee City: ");
-            String city = input.nextLine();
+            input.nextLine();
+            String city = addCity();
             employee.setCity(city);
             break;
         case 7 :
@@ -471,7 +497,7 @@ public class EmployeeController {
                 
             }
         } catch (EmployeeException e) {
-            logger.error("Error while display bank details", e.getMessage());
+            logger.error("Error while display bank details {}", e.getMessage());
         }
     }
 
@@ -484,7 +510,7 @@ public class EmployeeController {
             int accountId = input.nextInt();
             BankDetail bankDetail = bankDetailService.getBankDetailById(accountId);
             if(bankDetail == null) {
-                logger.warn("Account id doesnot exist");
+                logger.warn("Account id does not exist");
             } else {
                 String format = "| %-5s | %-10s | %-10s \n";
                 System.out.format(format, "Account Id", "Account Number", "Branch");
@@ -494,12 +520,12 @@ public class EmployeeController {
                 logger.info("Bank details displayed by account id successfully");
             }
         }  catch (EmployeeException e) {
-            logger.error("Error while displayingbank details by id", e.getMessage());
+            logger.error("Error while displaying bank details by id {}", e.getMessage());
         }
     }
 
     /**
-    * <p>Bank details updation 
+    * <p>Bank details update
     * @param employee - bank details updation in employee object <p>
     */
     public void updateBankDetail(Employee employee) {
@@ -511,14 +537,14 @@ public class EmployeeController {
             switch(updateChoice) {
             case 1 : 
                 System.out.println("Enter updated account number");
-                long accountNumber = input.nextLong();
+                long accountNumber = addAccountNumber();
                 bankDetail.setAccountNumber(accountNumber);
                 employee.getBankDetail().setAccountNumber(accountNumber);
                 break;
             case 2 :
                 System.out.println("Enter updated branch");
                 input.nextLine();
-                String branch = input.nextLine();
+                String branch = addBranch();
                 bankDetail.setBranch(branch);
                 employee.getBankDetail().setBranch(branch);
                 break;
@@ -529,7 +555,7 @@ public class EmployeeController {
             bankDetailService.updateBankDetail(bankDetail);
             logger.info("Employee bank details successfully updated"); 
         } catch (EmployeeException e) {
-            logger.error("Error while updating bank details", e.getMessage()); 
+            logger.error("Error while updating bank details {}", e.getMessage());
         }
     }  
 }

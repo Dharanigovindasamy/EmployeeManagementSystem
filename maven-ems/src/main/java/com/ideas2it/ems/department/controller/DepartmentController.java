@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.apache.logging.log4j.Logger;  
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 import com.ideas2it.ems.department.service.DepartmentService;
@@ -24,10 +24,10 @@ public class DepartmentController {
     Scanner scanner = new Scanner(System.in);
     DepartmentService departmentService = new DepartmentServiceImpl();
     
-    private static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
 
     /**
-    * Getting department details like deparmtent id, department name 
+    * Getting department details like department id, department name
     * It can do the functionalities like add, display, update and deleting by departments
     */
     
@@ -114,7 +114,7 @@ public class DepartmentController {
     }
 
     /** 
-    * <P>Display Department details By department Id
+    * <p>Display Department details By department Id
     * if department is null, shows warn. if it cause exception when error occurs
     * if department present by given id, it displays </p>
     */
@@ -128,7 +128,7 @@ public class DepartmentController {
                 logger.warn("Department details is not exists");
             } else {
                 System.out.println(department);
-                logger.info("Department are displayed successfully" + departmentId);
+                logger.info("Department are displayed successfully{}", departmentId);
             }
         } catch (EmployeeException e) {
             logger.error(e.getMessage());
@@ -147,7 +147,7 @@ public class DepartmentController {
         String departmentNewName = scanner.nextLine();
         try {
             departmentService.updateDepartment(departmentId, departmentNewName);
-            logger.info("Department updated successfully." + departmentId );
+            logger.info("Department updated successfully.{}", departmentId);
         } catch (EmployeeException e) {
             logger.error(e.getMessage());
         }
@@ -162,7 +162,7 @@ public class DepartmentController {
         int departmentId = scanner.nextInt();
         try {
             departmentService.deleteDepartment(departmentId);
-            logger.info("Department deleted successfully." + departmentId);
+            logger.info("Department deleted successfully.{}", departmentId);
         } catch (EmployeeException e) {
             logger.error(e.getMessage());
         }
@@ -196,7 +196,7 @@ public class DepartmentController {
                                       employee.getCertificates());
                 }
                 System.out.println(new String(new char[150]).replace("\0", "-"));
-                logger.info("Display employee details under the department" + departmentId);
+                logger.info("Display employee details under the department{}", departmentId);
             }
         } catch (EmployeeException e) {
             logger.error(e.getMessage());

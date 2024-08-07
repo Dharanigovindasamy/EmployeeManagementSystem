@@ -17,15 +17,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 
-import com.ideas2it.ems.model.BankDetail;
-import com.ideas2it.ems.model.Certificate;
-import com.ideas2it.ems.model.Department;
 import com.ideas2it.ems.util.Validator;
 
 /**
 * This class consists of employee records entity model
 *
-* <p> Represents the employee object that contains details like id, namen dob,
+* <p> Represents the employee object that contains details like id, name, dob,
 * contact number, mail id, experience , department which contains id & name,
 * salary, city, age & certificates contains id and name 
 * This is the model of the employee data
@@ -86,7 +83,6 @@ public class Employee {
     public Employee(String employeeName, LocalDate employeeDOB,
              long contactNumber, String mailId, int experience,
              double salary, String city, Department department, BankDetail bankDetail) {
-        this.employeeId = employeeId;
         this.employeeDOB = employeeDOB;
         this.employeeName = employeeName;
         this.contactNumber = contactNumber;
@@ -94,10 +90,8 @@ public class Employee {
         this.experience = experience;
         this.salary = salary;
         this.city = city;
-        this.isRemoved = isRemoved;
         this.department = department;
         this.bankDetail = bankDetail;
-        this.certificates = certificates;
     }
 
     public Employee() {}

@@ -1,10 +1,8 @@
 package com.ideas2it.ems.bankDetail.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.ideas2it.ems.model.BankDetail;
-import com.ideas2it.ems.model.Employee;
 import com.ideas2it.ems.exception.EmployeeException;
 
 /**
@@ -21,14 +19,14 @@ public interface BankDetailDao {
     * @param bankDetail - bank detail (account number, branch)of the bank detail
     * @throws EmployeeException , error occurs while adding bank details</p>
     */
-    public void addBankDetail(BankDetail bankDetail) throws EmployeeException; 
-     
+    void addBankDetail(BankDetail bankDetail) throws EmployeeException;
+
     /**
     *<p> Display bank details
     * @return List<BankDetail> list of bank details
     * @throws EmployeeException , error occurs while displaying bank details</p>
     */
-    public List<BankDetail> getAllBankDetail() throws EmployeeException; 
+    List<BankDetail> getAllBankDetail() throws EmployeeException;
 
     /**
     * <p>Display bank details by giving accountId
@@ -36,13 +34,13 @@ public interface BankDetailDao {
     * @throws EmployeeException , error occurs while displaying bank detail of account id
     *</p>
     */
-    public BankDetail getBankDetailById(int accountId) throws EmployeeException; 
+    BankDetail getBankDetailById(int accountId) throws EmployeeException;
     
     /**
-    * <p>Updating bankd detail
-    * @param bank detail - bank detail of updation
+    * <p>Updating bankId detail
+    * @param bankDetail - bank detail of update
     * @throws EmployeeException , error occurs while updating bank detail</p>
     */
-    public void updateBankDetail(BankDetail bankDetail) throws EmployeeException;
+    void updateBankDetail(BankDetail bankDetail) throws EmployeeException;
 }
 

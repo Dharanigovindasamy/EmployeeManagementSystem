@@ -6,7 +6,6 @@ import java.util.List;
 import com.ideas2it.ems.certificate.dao.CertificateDao;
 import com.ideas2it.ems.certificate.dao.CertificateDaoImpl;
 import com.ideas2it.ems.model.Certificate;
-import com.ideas2it.ems.certificate.service.CertificateService;
 import com.ideas2it.ems.model.Employee;
 import com.ideas2it.ems.exception.EmployeeException;
 import com.ideas2it.ems.employee.service.EmployeeService;
@@ -34,7 +33,7 @@ public class CertificateServiceImpl implements CertificateService {
 
     @Override
     public Certificate getCertificateById(int certificateId) throws EmployeeException {
-        return certificateDao.getCertificateById(certificateId);
+        return  certificateDao.getCertificateById(certificateId);
     }
 
     @Override
@@ -56,21 +55,14 @@ public class CertificateServiceImpl implements CertificateService {
     @Override
     public boolean isPresentCertificate(int certificateId) throws EmployeeException {
         Certificate certificate = certificateDao.getCertificateById(certificateId);
-        if (null == certificate) {
-            return false;
-        } 
-        return true;
+        return null != certificate;
     }
 
     @Override
     public boolean isPresentEmployeeAndCertificate(int employeeId, int certificateId) throws EmployeeException {
         boolean isPresent = employeeService.isPresentEmployee(employeeId);
         if (isPresent) {
-            if (isPresentCertificate(certificateId)) {
-                return true;
-            } else {
-                return false;
-            }
+            return isPresentCertificate(certificateId);
         } 
         return false;
     }

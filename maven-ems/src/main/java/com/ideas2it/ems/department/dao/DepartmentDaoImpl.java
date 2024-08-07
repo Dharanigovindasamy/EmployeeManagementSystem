@@ -2,12 +2,7 @@ package com.ideas2it.ems.department.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.time.LocalDate;
 
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -16,7 +11,6 @@ import org.hibernate.Transaction;
 
 import com.ideas2it.ems.connectionManager.HibernateConnection;
 import com.ideas2it.ems.model.Department;
-import com.ideas2it.ems.department.dao.DepartmentDao;
 import com.ideas2it.ems.exception.EmployeeException;
 import com.ideas2it.ems.model.Employee;
 
@@ -33,19 +27,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
     
     @Override
     public void addDepartment(Department department) throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
         Transaction transaction = null;
-        try {
+        try (Session session = HibernateConnection.getFactory().openSession()) {
             transaction = session.beginTransaction();
             session.save(department);
-            transaction.commit(); 
+            transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new EmployeeException("Unable to add the department : " + department.getDepartmentId() , e);
-        } finally {
-            session.close();
+            throw new EmployeeException("Unable to add the department : " + department.getDepartmentId(), e);
         }
     }
 
@@ -53,7 +44,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public List<Department> getAllDepartments() throws EmployeeException {
         Session session = HibernateConnection.getFactory().openSession();
         Transaction transaction = null;
-        List<Department> departments = null;
+        List<Department> departments;
         try {
             transaction = session.beginTransaction();
             Query<Department> query = session.createQuery("FROM Department WHERE isRemoved = :isRemoved " , Department.class)
@@ -75,7 +66,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public Department getDepartmentById(int departmentId) throws EmployeeException {
         Session session = HibernateConnection.getFactory().openSession();
         Transaction transaction = null;
-        Department department = null;
+        Department department ;
         try {
             transaction = session.beginTransaction();
             department = session.createQuery("FROM Department WHERE departmentId = :departmentId and isRemoved = :isRemoved" , Department.class)
@@ -98,7 +89,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public List<Employee> getEmployeesByDepartmentId(int departmentId) throws EmployeeException {
         Session session = HibernateConnection.getFactory().openSession();
         Transaction transaction = null;
-        List<Employee> employees = null;
+        List<Employee> employees;
         try {
             transaction = session.beginTransaction();
             Department department = session.get(Department.class, departmentId);
@@ -117,39 +108,33 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public void updateDepartment(Department department) throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
         Transaction transaction = null;
-        try {
+        try (Session session = HibernateConnection.getFactory().openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(department);
-            transaction.commit(); 
+            transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new EmployeeException("Unable to update the certificate : " + department , e);
-        } finally {
-            session.close();
-        }  
+            throw new EmployeeException("Unable to update the certificate : " + department, e);
+        }
     }
     
     @Override 
     public void deleteDepartment(int departmentId) throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
         Transaction transaction = null;
-        try {
+        try (Session session = HibernateConnection.getFactory().openSession()) {
             transaction = session.beginTransaction();
-            Query<Department> query = session.createQuery("UPDATE Department SET isRemoved = :isRemoved where DepartmentId = :departmentId");
+            Query<?> query = session.createQuery("UPDATE Department SET isRemoved = :isRemoved where DepartmentId = :departmentId");
             query.setParameter("isRemoved", true);
             query.executeUpdate();
-            transaction.commit(); 
+            transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new EmployeeException("Unable to delete the department : " + departmentId , e);
-        } finally {
-            session.close();
-        }    
+            throw new EmployeeException("Unable to delete the department : " + departmentId, e);
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.ideas2it.ems.connectionManager;
 
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

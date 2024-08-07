@@ -26,7 +26,8 @@ public class CertificateController {
     CertificateService certificateService = new CertificateServiceImpl();
     EmployeeService employeeService = new EmployeeServiceImpl();
 
-    private static Logger logger = LogManager.getLogger();
+
+    private static final Logger logger = LogManager.getLogger();
 
     /**
     * Performing the options by certificate details
@@ -129,9 +130,9 @@ public class CertificateController {
             Certificate certificate = certificateService.getCertificateById(certificateId);
             if (certificate != null) {
                 System.out.println("certificate Id : " + certificate.getCertificateId() + " Certificate Name : " + certificate.getCertificateName());
-                logger.info("Display vertificate by Id", certificate.getCertificateId());
+                logger.info("Display certificate by Id {} ", certificate.getCertificateId());
             } else {
-                logger.warn("Certificate with ID " + certificateId + " not found.");
+                logger.warn("Certificate with ID {} not found.", certificateId);
             }
         } catch (EmployeeException e) {
             logger.error(e.getMessage());
@@ -145,15 +146,25 @@ public class CertificateController {
     public void updateCertificate() {
         System.out.print("Enter Certificate ID to Update: ");
         int certificateId = scanner.nextInt();
-        scanner.nextLine(); 
-        System.out.print("Enter New Certificate Name: ");
-        String newName = scanner.nextLine();
         try {
-            certificateService.updateCertificate(certificateId, newName);
-            logger.info("Certificate updated successfully." + certificateId);
+            Certificate certificate = certificateService.getCertificateById(certificateId);
+            if (null != certificate) {
+                scanner.nextLine();
+                System.out.print("Enter New Certificate Name: ");
+                String newName = scanner.nextLine();
+                try {
+                    certificateService.updateCertificate(certificateId, newName);
+                    logger.info("Certificate updated successfully.{} " , certificateId);
+                } catch (EmployeeException e) {
+                    logger.error(e.getMessage());
+                }
+            } else {
+                logger.warn("Certificate id does not exist {}", certificateId);
+            }
         } catch (EmployeeException e) {
-            logger.error(e.getMessage());
+            logger.error("Issue while updating {}" , e.getMessage());
         }
+
     }
 
     /**
@@ -164,16 +175,25 @@ public class CertificateController {
         System.out.print("Enter Certificate ID to Delete: ");
         int certificateId = scanner.nextInt();
         try {
-            certificateService.deleteCertificate(certificateId);
-            logger.info("Certificate deleted successfully." + certificateId);
+            Certificate certificate = certificateService.getCertificateById(certificateId);
+            if(null != certificate ) {
+                try {
+                    certificateService.deleteCertificate(certificateId);
+                    logger.info("Certificate deleted successfully. {} " , certificateId);
+                } catch (EmployeeException e) {
+                    logger.error("Issue while deleting {}" , certificateId);
+                }
+            } else {
+                logger.error("Certificate id does not exist {}", certificateId);
+            }
         } catch (EmployeeException e) {
-            logger.error(e.getMessage());
+            logger.error("Error occurs while serching certificate id {}", e.getMessage());
         }
     }
 
     /**
     * <p>Add certificate details to employee by employee id
-    * If certificate id and employee id presents it can be assigned othwerwise shows exception</p>
+    * If certificate id and employee id presents it can be assigned otherwise shows exception</p>
     */
     public void addCertificateToEmployee() {
         System.out.print("Enter Employee ID: ");
@@ -189,7 +209,7 @@ public class CertificateController {
                 certificateId = scanner.nextInt();
             }
             certificateService.addCertificateToEmployee(employeeId, certificateId);
-            logger.info("Certificate added to employee successfully." + certificateId);
+            logger.info("Certificate added to employee successfully.{} " , certificateId);
         } catch (EmployeeException e) {
             logger.error(e.getMessage());
         }
@@ -207,7 +227,7 @@ public class CertificateController {
         try {
             List<Employee> employees = certificateService.getEmployeesByCertificate(certificateId);
             if (employees.isEmpty()) {
-                logger.warn("No employees found for Certificate ID " + certificateId);
+                logger.warn("No employees found for Certificate ID {} " , certificateId);
             } else {
                 String format = "| %-5s | %-10s | %-3s | %-15s | %-15s | %-10s | %-10s | %-10s | %-15s |\n";
                 System.out.format(format, "ID", "Name", "Age", "Contact Number", "Mail ID", "Experience", "Salary", "City", "Department");
@@ -225,7 +245,7 @@ public class CertificateController {
                                       employee.getDepartment().getDepartmentName());
                 }
                 System.out.println(new String(new char[150]).replace("\0", "-"));
-                logger.info("Display employees by certificate Id", certificateId);
+                logger.info("Display employees by certificate Id {} ", certificateId);
             }
         } catch (EmployeeException e) {
             logger.error(e.getMessage());
@@ -234,7 +254,7 @@ public class CertificateController {
 
     /** 
     * <p>Display certificates by giving employee id
-    * If employee doesnot done certificate shows warn, if donedisplay certificate details
+    * If employee does not done certificate shows warn, if done display certificate details
     * if error occurs cause exception</p>
     */
     public void displayCertificatesByEmployee() {
@@ -243,15 +263,15 @@ public class CertificateController {
         try {
             List<Certificate> certificates = employeeService.getCertificatesByEmployeeId(employeeId);
             if (certificates.isEmpty()) {
-                logger.warn("No certificates found for Employee ID " + employeeId);
+                logger.warn("No certificates found for Employee ID {} " , employeeId);
             } else {
                 for(Certificate certificate : certificates) {
                     System.out.println("Certificates: " + "certificate ID : " + certificate.getCertificateId() +  "certificate Name : " + certificate.getCertificateName());
-                    logger.info("Displayed certificate by employee Id", employeeId);
+                    logger.info("Displayed certificate by employee Id {} ", employeeId);
                 }
             }
         } catch (EmployeeException e) {
-            logger.error(e.getMessage());
+            logger.error("Exception occurs while displaying certificate by employee Id {} ", e.getMessage());
         }
     }
 }
