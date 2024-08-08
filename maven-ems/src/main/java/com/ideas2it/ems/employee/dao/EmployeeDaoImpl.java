@@ -50,24 +50,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> getAllEmployees() throws EmployeeException {
         logger.debug("Starts displaying all employee details: ");
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         List<Employee> employees;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession()) {
             Query<Employee> query = session.createQuery("FROM Employee WHERE isRemoved = :isRemoved", Employee.class)
                                                          .setParameter("isRemoved", false);
             employees = query.list();
             logger.debug("Successfully displaying all employee details: ");
-            transaction.commit();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             logger.error("Error while displaying all employee details {} ", e.getMessage());
             throw new EmployeeException("Unable to get all the employees", e);
-        } finally {
-            session.close();
         }
         return employees;
     }
@@ -75,24 +66,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee getEmployeeById(int employeeId) throws EmployeeException {
         logger.debug("Starts displaying employee details by employee id: {}", employeeId);
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         Employee employee;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession()){
             employee = session.createQuery("FROM Employee WHERE employeeId = :EmployeeId AND isRemoved = :isRemoved" , Employee.class)
                                             .setParameter("EmployeeId" , employeeId)
                                             .setParameter("isRemoved",false).uniqueResult();
             logger.debug("Successfully displaying employee details by employee id: {}", employeeId);
-            transaction.commit();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
             logger.error("Error while displaying employee details by employee Id {} " , e.getMessage());
             throw new EmployeeException("Unable to get employee by ID: " + employeeId, e);
-        } finally {
-            session.close();
         }
         return employee;
     }
@@ -139,25 +122,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Certificate> getCertificatesByEmployeeId(int employeeId) throws EmployeeException {
         logger.debug("Starts getting certificates by employee id {} ", employeeId);
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         List<Certificate> certificates ;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession()){
             Employee employee = session.createQuery("FROM Employee WHERE EmployeeId = :EmployeeId AND isRemoved = :isRemoved", Employee.class)
                                                      .setParameter("EmployeeId" , employeeId)
                                                      .setParameter("isRemoved" , false).uniqueResult();
             certificates = new ArrayList<>(employee.getCertificates());
             logger.debug("Successfully got certificates by employee id {}", employeeId);
-            transaction.commit();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             logger.error("Error while getting certificates by employee id {}", e.getMessage());
             throw new EmployeeException("Unable to get certificates by employee ID: " + employeeId, e);
-        } finally {
-            session.close();
         }
         return certificates;
     }

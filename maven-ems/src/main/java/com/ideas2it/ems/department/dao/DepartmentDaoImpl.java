@@ -3,6 +3,8 @@ package com.ideas2it.ems.department.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -24,7 +26,9 @@ import com.ideas2it.ems.model.Employee;
 * @author Dharani G
 */
 public class DepartmentDaoImpl implements DepartmentDao {
-    
+
+    private static final Logger logger = LogManager.getLogger();
+
     @Override
     public void addDepartment(Department department) throws EmployeeException {
         Transaction transaction = null;
@@ -36,72 +40,48 @@ public class DepartmentDaoImpl implements DepartmentDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            logger.error("Error while adding department details {}", e.getMessage());
             throw new EmployeeException("Unable to add the department : " + department.getDepartmentId(), e);
         }
     }
 
     @Override
     public List<Department> getAllDepartments() throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         List<Department> departments;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession();){
             Query<Department> query = session.createQuery("FROM Department WHERE isRemoved = :isRemoved " , Department.class)
                                                           .setParameter("isRemoved", false);
             departments = query.list();
-            transaction.commit(); 
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            logger.error("Issue occurs while displaying department details {}", e.getMessage());
             throw new EmployeeException("Unable to get all the departments : " , e);
-        } finally {
-            session.close();
-        }    
+        }
         return departments;
     }
 
     @Override
     public Department getDepartmentById(int departmentId) throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         Department department ;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession()){
             department = session.createQuery("FROM Department WHERE departmentId = :departmentId and isRemoved = :isRemoved" , Department.class)
                                              .setParameter("departmentId" , departmentId)
                                              .setParameter("isRemoved", false).uniqueResult();
-            transaction.commit(); 
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            System.out.println(e.getMessage());
+            logger.error("Error while displaying department details by id {}", e.getMessage());
             throw new EmployeeException("Unable to get department by: " + departmentId , e);
-        } finally {
-            session.close();
         }
         return department;
     }
     
     @Override
     public List<Employee> getEmployeesByDepartmentId(int departmentId) throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         List<Employee> employees;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession()){
             Department department = session.get(Department.class, departmentId);
             employees = new ArrayList<>(department.getEmployees());
-            transaction.commit();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            logger.error("Error while getting employee details by department Id {}", e.getMessage());
             throw new EmployeeException("Unable to get employees for department: " + departmentId, e);
-        } finally {
-            session.close();
         }
         return employees;
     }
@@ -117,6 +97,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            logger.error("Error while updating department details {}", e.getMessage());
             throw new EmployeeException("Unable to update the certificate : " + department, e);
         }
     }
@@ -134,6 +115,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            logger.error("Error while deleting department details {}", e.getMessage());
             throw new EmployeeException("Unable to delete the department : " + departmentId, e);
         }
     }

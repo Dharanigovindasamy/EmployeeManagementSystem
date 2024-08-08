@@ -168,7 +168,7 @@ public class Employee {
         this.city = city;
     }
 
-    public int getAge() {
+    public String getAge() {
         return Validator.calculateAge(employeeDOB);
     }   
 

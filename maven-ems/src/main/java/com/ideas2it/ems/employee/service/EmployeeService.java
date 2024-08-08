@@ -81,5 +81,5 @@ public interface EmployeeService {
     * <p> By passing department id, fetch in employee object , is the employee are under the given department or not,
     * if yes, fetch it as list of employee details in the employee table </p>
     */
-    List<Employee> getEmployeesByDepartmentId(int departmentId) throws EmployeeException;
+   // List<Employee> getEmployeesByDepartmentId(int departmentId) throws EmployeeException;
 }

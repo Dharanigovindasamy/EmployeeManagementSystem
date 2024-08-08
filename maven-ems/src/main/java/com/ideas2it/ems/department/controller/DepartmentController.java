@@ -40,7 +40,7 @@ public class DepartmentController {
             System.out.println("3. Display Department by Id");
             System.out.println("4. Update Department");
             System.out.println("5. Delete Department");
-            System.out.println(" 6. Get employee by department id");
+            System.out.println("6. Get employee by department id");
             System.out.println("7. Back to Main Menu");
 
             int departmentChoice = scanner.nextInt();
@@ -83,10 +83,10 @@ public class DepartmentController {
         String departmentName = scanner.nextLine();
         try {
             departmentService.addDepartment(departmentName);
-            logger.info("Department added successfully");
+            logger.info("Department added successfully {}", departmentName);
             System.out.println("-----------------------------");
         } catch (EmployeeException e) {
-            logger.error(e.getMessage());
+            logger.error("Unable to add department name {} ", e.getMessage());
         }
     }
 
@@ -109,7 +109,7 @@ public class DepartmentController {
                 logger.info("Departments are displayed successfully");
             }
         } catch (EmployeeException e) {
-            logger.error(e.getMessage());
+            logger.error("Unable to display {}", e.getMessage());
         }
     }
 
@@ -131,7 +131,7 @@ public class DepartmentController {
                 logger.info("Department are displayed successfully{}", departmentId);
             }
         } catch (EmployeeException e) {
-            logger.error(e.getMessage());
+            logger.error("Unable to display departmennt by Id {} ", e.getMessage());
         }
     }
 
@@ -149,7 +149,7 @@ public class DepartmentController {
             departmentService.updateDepartment(departmentId, departmentNewName);
             logger.info("Department updated successfully.{}", departmentId);
         } catch (EmployeeException e) {
-            logger.error(e.getMessage());
+            logger.error("Unable to update department{} ", e.getMessage());
         }
     }
 
@@ -164,7 +164,7 @@ public class DepartmentController {
             departmentService.deleteDepartment(departmentId);
             logger.info("Department deleted successfully.{}", departmentId);
         } catch (EmployeeException e) {
-            logger.error(e.getMessage());
+            logger.error("Unable to delete department {} ", e.getMessage());
         }
     }
 
@@ -199,7 +199,7 @@ public class DepartmentController {
                 logger.info("Display employee details under the department{}", departmentId);
             }
         } catch (EmployeeException e) {
-            logger.error(e.getMessage());
+            logger.error("Unable to get employees by department id {}", e.getMessage());
         }
     }
 }

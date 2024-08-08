@@ -187,7 +187,7 @@ public class CertificateController {
                 logger.error("Certificate id does not exist {}", certificateId);
             }
         } catch (EmployeeException e) {
-            logger.error("Error occurs while serching certificate id {}", e.getMessage());
+            logger.error("Error occurs while searching certificate id {}", e.getMessage());
         }
     }
 

@@ -1,10 +1,6 @@
 package com.ideas2it.ems.util;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat; 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -42,8 +38,8 @@ public class Validator {
         }
     }
 
-    public static int calculateAge(LocalDate dob) {
-        return Period.between(dob, LocalDate.now()).getYears();
+    public static String calculateAge(LocalDate dob) {
+        return Period.between(dob, LocalDate.now()).getYears() + " y " + Period.between(dob, LocalDate.now()).getMonths() + " M " ;
     }
 
     
@@ -56,8 +52,8 @@ public class Validator {
     *
     */
     public static boolean isValidContact(String contactNumberString) {  
-        Pattern ptrn = Pattern.compile("(0/91)?[6-9][0-9]{9}");  
-        Matcher match = ptrn.matcher(contactNumberString);  
+        Pattern pattern = Pattern.compile("(0/91)?[6-9][0-9]{9}");
+        Matcher match = pattern.matcher(contactNumberString);
         return (match.find() && match.group().equals(contactNumberString));  
     } 
 

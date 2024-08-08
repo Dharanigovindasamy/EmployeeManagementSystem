@@ -3,7 +3,6 @@ package com.ideas2it.ems.employee.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-import java.util.Set;
 
 import com.ideas2it.ems.model.BankDetail;
 import com.ideas2it.ems.model.Certificate;
@@ -84,8 +83,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return certificates;
     }
  
-    @Override
+    /**@Override
     public List<Employee> getEmployeesByDepartmentId(int departmentId) throws EmployeeException {
         return departmentService.getEmployeesByDepartmentId(departmentId);
-    }
+    } */
 }

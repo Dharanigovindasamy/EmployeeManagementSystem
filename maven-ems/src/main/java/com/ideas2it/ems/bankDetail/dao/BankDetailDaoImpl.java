@@ -2,6 +2,8 @@ package com.ideas2it.ems.bankDetail.dao;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -20,6 +22,7 @@ import com.ideas2it.ems.exception.EmployeeException;
 */
 public class BankDetailDaoImpl implements BankDetailDao {
 
+    private static final Logger logger = LogManager.getLogger();
     @Override
     public void addBankDetail(BankDetail bankDetail) throws EmployeeException {
         Transaction transaction = null;
@@ -31,51 +34,35 @@ public class BankDetailDaoImpl implements BankDetailDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            logger.error("Error while adding bank details {}", e.getMessage());
             throw new EmployeeException("Unable to add the bankDetails : " + bankDetail.getAccountId(), e);
         }
     }
 
       @Override
     public List<BankDetail> getAllBankDetail() throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         List<BankDetail> bankDetails;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession()){
             Query<BankDetail> query = session.createQuery("FROM BankDetail WHERE isRemoved = :isRemoved " , BankDetail.class)
                                                           .setParameter("isRemoved", false);
             bankDetails = query.list();
-            transaction.commit(); 
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            logger.error("Error while displaying all bank details {}", e.getMessage());
             throw new EmployeeException("Unable to get all the bankDetails : " , e);
-        } finally {
-            session.close();
-        }    
+        }
         return bankDetails;
     }
 
     @Override
     public BankDetail getBankDetailById(int accountId) throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         BankDetail bankDetail;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession()){
             bankDetail = session.createQuery("FROM BankDetail WHERE accountId = :accountId and isRemoved = :isRemoved" , BankDetail.class)
                                              .setParameter("accountId" , accountId)
                                              .setParameter("isRemoved", false).uniqueResult();
-            transaction.commit(); 
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            System.out.println(e.getMessage());
+            logger.error("Error while getting bank details by accountId {}", e.getMessage());
             throw new EmployeeException("Unable to get bankDetails by: " + accountId , e);
-        } finally {
-            session.close();
         }
         return bankDetail;
     }
@@ -91,6 +78,7 @@ public class BankDetailDaoImpl implements BankDetailDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            logger.error("Error while updating bank details {}", e.getMessage());
             throw new EmployeeException("Unable to update the certificate : " + bankDetail.getAccountId(), e);
         }
     }

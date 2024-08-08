@@ -1,9 +1,12 @@
 package com.ideas2it.ems.certificate.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -24,7 +27,8 @@ import com.ideas2it.ems.exception.EmployeeException;
 * @author Dharani G
 */
 public class CertificateDaoImpl implements CertificateDao {
- 
+
+    private static final Logger logger = LogManager.getLogger();
     @Override
     public void addCertificate(Certificate certificate) throws EmployeeException {
         Transaction transaction = null;
@@ -36,35 +40,26 @@ public class CertificateDaoImpl implements CertificateDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            logger.error("Error while adding certificates {}", e.getMessage());
             throw new EmployeeException("Unable to add the certificate: " + certificate.getCertificateId(), e);
         }
     }
 
     @Override
     public void addCertificateToEmployee(int employeeId, int certificateId) throws EmployeeException {
-        Transaction transaction = null;
         try (Session session = HibernateConnection.getFactory().openSession()) {
-            transaction = session.beginTransaction();
-          /*  Query<Certificate> query = session.createQuery(SELECT Certificates FROM Employee WHERE employeeId = :employeeId , isRemoved = :isRemoved, employee.class)
-                                                           .setParameter("employeeId", employeeId)
-                                                           .setParameter("isRemoved", false);
-            Query<Employee> query = */
             Employee employee = session.get(Employee.class, employeeId);
             Certificate certificate = session.get(Certificate.class, certificateId);
-            Set<Certificate> certificates = employee.getCertificates();
-            Set<Employee> employees = certificate.getEmployees();
+            Set<Certificate> certificates = new HashSet<>();
             certificates.add(certificate);
-            employees.add(employee);
             employee.setCertificates(certificates);
-            certificate.setEmployees(employees);
+            System.out.println("certificate:" + certificate.getCertificateName());
             session.saveOrUpdate(employee);
-            session.saveOrUpdate(certificate);
-            transaction.commit();
+            System.out.println(employee.getEmployeeName());
+            System.out.println(certificates);
+            System.out.println("working");
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            System.out.println(e.getMessage());
+            logger.error("Error while adding certificates to employee {}", e.getMessage());
             throw new EmployeeException("Unable to add certificate to employee. Employee ID: "
                     + employeeId + ", Certificate ID: " + certificateId, e);
         }
@@ -72,44 +67,28 @@ public class CertificateDaoImpl implements CertificateDao {
 
     @Override
     public List<Certificate> getAllCertificates() throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         List<Certificate> certificates;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession()){
             Query<Certificate> query = session.createQuery("FROM Certificate WHERE isRemoved = :isRemoved", Certificate.class)
                                                             .setParameter("isRemoved", false);
             certificates = query.list();
-            transaction.commit(); 
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            logger.error("Error while getting certificates {}", e.getMessage());
             throw new EmployeeException("Unable to get all the certificates : " , e);
-        } finally {
-            session.close();
         }
         return certificates;
     }
 
     @Override
     public Certificate getCertificateById(int certificateId)throws EmployeeException {
-        Session session = HibernateConnection.getFactory().openSession();
-        Transaction transaction = null;
         Certificate certificate ;
-        try {
-            transaction = session.beginTransaction();
+        try ( Session session = HibernateConnection.getFactory().openSession()) {
             certificate = session.createQuery("FROM Certificate WHERE certificateId = :certificateId and isRemoved = :isRemoved" , Certificate.class)
                                               .setParameter("certificateId" , certificateId)
                                               .setParameter("isRemoved", false).uniqueResult();
-            transaction.commit(); 
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            logger.error("Error while getting certificates by id {}", e.getMessage());
             throw new EmployeeException("Unable to get Certificate id: " + certificateId, e);
-        } finally {
-            session.close();
         }
         return certificate;
     }
@@ -125,6 +104,7 @@ public class CertificateDaoImpl implements CertificateDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            logger.error("Error while updating certificates {}", e.getMessage());
             throw new EmployeeException("Unable to update the certificate : " + certificate.getCertificateId(), e);
         }
     }
@@ -142,34 +122,24 @@ public class CertificateDaoImpl implements CertificateDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            logger.error("Error while deleting certificates {}", e.getMessage());
             throw new EmployeeException("Unable to delete the employee : " + certificateId, e);
         }
     }
 
     @Override
     public List<Employee> getEmployeesByCertificate(int certificateId) throws EmployeeException {
-        Session session = null;
-        Transaction transaction = null;
         List<Employee> employees = new ArrayList<>();
-        try {
-            session = HibernateConnection.getFactory().openSession();
-            transaction = session.beginTransaction();
+        try (Session session = HibernateConnection.getFactory().openSession()) {
             Certificate certificate = session.createQuery("FROM Certificate WHERE certificateId = :certificateId and isRemoved = :isRemoved" , Certificate.class) 
                                                .setParameter("certificateId" , certificateId)
                                                .setParameter("isRemoved", false).uniqueResult();
             if (certificate != null) {
                 employees.addAll(certificate.getEmployees());
             }
-            transaction.commit();
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            logger.error("Error while getting employee  details certificate id {}", e.getMessage());
             throw new EmployeeException("Unable to get employees by certificate id: " + certificateId, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
         return employees;
     }

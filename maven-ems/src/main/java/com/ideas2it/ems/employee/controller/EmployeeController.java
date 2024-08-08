@@ -167,14 +167,14 @@ public class EmployeeController {
     private LocalDate addDOB() {
         boolean isActive = true;
         LocalDate employeeDOB = null;
-        int age;
+        String age = " ";
         while (isActive) {
             System.out.println("Enter DOB in yyyy-mm-dd format.");
             String dobString = input.nextLine();
             try {
                 employeeDOB = Validator.parseDate(dobString);
                 age = Validator.calculateAge(employeeDOB);
-                System.out.println("Employee's age: " + age);
+                System.out.println("Employee's age: " + age );
                 isActive = false;
             } catch (IllegalArgumentException e) {
                 logger.error("Enter valid date of birth {} ", e.getMessage());
