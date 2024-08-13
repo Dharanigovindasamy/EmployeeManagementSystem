@@ -48,6 +48,7 @@ public class CertificateDaoImpl implements CertificateDao {
     @Override
     public void addCertificateToEmployee(int employeeId, int certificateId) throws EmployeeException {
         try (Session session = HibernateConnection.getFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
             Employee employee = session.get(Employee.class, employeeId);
             Certificate certificate = session.get(Certificate.class, certificateId);
             Set<Certificate> certificates = new HashSet<>();
@@ -58,6 +59,7 @@ public class CertificateDaoImpl implements CertificateDao {
             System.out.println(employee.getEmployeeName());
             System.out.println(certificates);
             System.out.println("working");
+            transaction.commit();
         } catch (HibernateException e) {
             logger.error("Error while adding certificates to employee {}", e.getMessage());
             throw new EmployeeException("Unable to add certificate to employee. Employee ID: "

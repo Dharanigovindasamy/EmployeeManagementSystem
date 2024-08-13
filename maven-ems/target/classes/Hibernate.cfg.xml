@@ -23,7 +23,7 @@
          root
       </property>
       
-      <property name = "hibernate.hbm2ddl.auto">create</property>
+      <property name = "hibernate.hbm2ddl.auto">update</property>
       <property name = "show-sql">true</property>
 
       <mapping class = "com.ideas2it.ems.model.Employee"/>
