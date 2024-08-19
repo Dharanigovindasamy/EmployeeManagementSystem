@@ -5,16 +5,36 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ideas2it.ems.util.Validator;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.*;
+import org.apache.logging.log4j.core.config.plugins.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.UniqueElements;
 
+/**
+ * <p>
+ *     This is the employee class that holds the data
+ *  which can validate user data through annotations and store the data in the table
+ * </p>
+ *
+ * @author dharani.govindhasamy
+ */
 @Entity
 @Table(name = "employees")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
@@ -23,30 +43,31 @@ public class Employee {
     @Column(name = "id")
     private int employeeId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
+    @NotBlank
     private String employeeName;
 
-    @Column(name = "employee_dob")
+    @Column(name = "employee_dob", nullable = false)
     private LocalDate employeeDOB;
 
-    @Column(name = "contact_number")
+    @Column(name = "contact_number",  nullable = false)
     private long contactNumber;
 
-    @Column(name = "mail_id")
+    @Column(name = "mail_id",  nullable = false, unique = true)
     private String mailId;
 
-    @Column(name = "experience")
+    @Column(name = "experience", nullable = false)
     private int experience;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "department_id", nullable = false)
     @JsonBackReference
     private Department department;
 
-    @Column(name = "salary")
+    @Column(name = "salary", nullable = false)
     private double salary;
 
-    @Column(name = "city")
+    @Column(name = "city", nullable = false)
     private String city;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})

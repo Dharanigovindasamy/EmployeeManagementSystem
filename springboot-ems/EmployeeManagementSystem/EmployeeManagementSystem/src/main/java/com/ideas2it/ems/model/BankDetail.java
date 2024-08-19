@@ -6,10 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * <p>
@@ -25,6 +22,7 @@ import lombok.Setter;
 @Table(name = "bank_details")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class BankDetail {
@@ -34,10 +32,10 @@ public class BankDetail {
     @Column(name = "id")
     private int accountId;
 
-    @Column(name = "account_number")
+    @Column(name = "account_number", nullable = false, unique = true)
     private long accountNumber;
 
-    @Column(name = "branch")
+    @Column(name = "branch", nullable = false)
     private String branch;
 
     @Column(name = "isRemoved")

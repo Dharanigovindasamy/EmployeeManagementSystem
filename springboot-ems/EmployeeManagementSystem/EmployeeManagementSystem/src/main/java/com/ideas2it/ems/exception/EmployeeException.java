@@ -1,11 +1,14 @@
 package com.ideas2it.ems.exception;
 
 /**
-* This class deals with Exception in all my applications
-* It calls the employee Exception with message context and throwable message
+* <p>
+ *     This class deals with Employee Exception in all my applications
+* It calls the employee Exception with message context and throwable message, extends from RumTime exception
+ * </p>
+ * @author dharani.govindhasamy
 */
-public class EmployeeException extends Exception {
-    public EmployeeException(String message, Throwable throwable) {
-        super(message, throwable);    
+public class EmployeeException extends RuntimeException {
+    public EmployeeException(String message) {
+        super(message);
     }    
 }

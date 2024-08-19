@@ -11,18 +11,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /** 
 * <p>This class consists of department entity as Object
- * Entitites which contains in Department object
+ * Entities which contains in Department object
  * are defined as private specifier for secure
+ * This is the employee class that holds the data
+ *  which can validate user data through annotations and store the data in the table
  *  Represents the department which contains id & name,
  *  Created constructor and getter ,setter method
- *  This class can create the database table by column name </p>
+ *  This class can create the database table by column name
+ *  </p>
 * 
 * @author DHARANI G
 */
@@ -31,6 +31,7 @@ import lombok.Setter;
 @Table(name = "departments")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Department {
@@ -39,7 +40,7 @@ public class Department {
     @Column(name = "id")
     private int departmentId;
 
-    @Column(name = "department_name")
+    @Column(name = "department_name", nullable = false, unique = true)
     private String departmentName;
 
     @Column(name = "is_removed")
@@ -48,7 +49,6 @@ public class Department {
     @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<Employee> employees;
-
 
     public Department(String departmentName) {
         this.departmentName = departmentName;

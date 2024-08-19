@@ -11,25 +11,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * <p>
  *     This class contains certificates of the employee ie..certificate id and name.
  *     getter and setter and constructors .
  *     This can create table in the server with column name
- * </p>
+ *     This is the employee class that holds the data
+ *    which can validate user data through annotations and store the data in the table
+ *   </p>
  *
- * @author dharani.govindhasamy
- *
+ *   @author dharani.govindhasamy
  */
+
 @Entity
 @Table(name = "certificates")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Certificate {
@@ -38,7 +38,7 @@ public class Certificate {
     @Column(name = "id")
     private int certificateId;
 
-    @Column(name = "certificate_name")
+    @Column(name = "certificate_name", nullable = false, unique = true)
     private String certificateName;
 
     @Column(name = "is_removed")
