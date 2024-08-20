@@ -6,9 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import com.ideas2it.ems.dto.DepartmentDto;
+import com.ideas2it.ems.exception.EmployeeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,6 +50,9 @@ class EmployeeControllerTest {
     DepartmentDto departmentDto = new DepartmentDto();
     CertificateDto certificateDto = new CertificateDto();
     Department department =new Department();
+    Employee employee = new Employee();
+    Certificate certificate = new Certificate();
+    Set<Employee> employees = new HashSet<>();
 
     @BeforeEach
     void setUp() {
@@ -58,6 +63,7 @@ class EmployeeControllerTest {
         employeeDto.setEmployeeDOB(LocalDate.of(2000, 10, 10));
         employeeDto.setContactNumber(9898989898L);
         employeeDto.setDepartmentId(3);
+        employeeDto.setDepartmentName("IT");
         employeeDto.setMailId("dharani@gmail.com");
         employeeDto.setExperience(4);
         employeeDto.setSalary(65000);
@@ -66,15 +72,29 @@ class EmployeeControllerTest {
         employeeDto.setCertificateName("aws master");
         employeeDto.setAccountNumber(145564352L);
         employeeDto.setBranch("Sathy");
-
-
-        certificateDto.setCertificateId(employeeDto.getCertificateId());
-        certificateDto.setCertificateName(employeeDto.getCertificateName());
-
         departmentDto.setDepartmentId(3);
         departmentDto.setDepartmentName("IT");
         department.setDepartmentId(3);
         department.setDepartmentName("IT");
+        certificate.setCertificateId(1);
+        certificate.setCertificateName("aws master");
+        Set<Certificate> certificates = new HashSet<>();
+        certificates.add(certificate);
+        employee.setEmployeeId(1);
+        employee.setEmployeeName("Dharani");
+        employee.setEmployeeDOB(LocalDate.of(2000, 10, 10));
+        employee.setContactNumber(9898989898L);
+        employee.setDepartment(department);
+        employee.setMailId("dharani@gmail.com");
+        employee.setExperience(4);
+        employee.setSalary(65000);
+        employee.setCity("Erode");
+        employee.setCertificates(certificates);
+        employee.setBankDetail(new BankDetail(145564352L,"Sathy" ));
+        certificateDto.setCertificateId(employeeDto.getCertificateId());
+        certificateDto.setCertificateName(employeeDto.getCertificateName());
+        employees.add(employee);
+
     }
 
     @Test
@@ -89,61 +109,86 @@ class EmployeeControllerTest {
     }
 
     @Test
-    void testDisplayEmployees() {
-        Set<Employee> employees = new HashSet<>();
-        employees.add(new Employee());
+    void testDisplayEmployeesSuccess() {
         when(employeeService.getAllEmployees()).thenReturn(employees);
         ResponseEntity<Set<EmployeeDto>> response = employeeController.displayEmployees();
+        assertEquals(1,employees.size());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+
     @Test
     void testDisplayEmployeeById() {
-        Employee employee = new Employee();
-        when(employeeService.getEmployeeById(anyInt())).thenReturn(employee);
+        when(employeeService.getEmployeeById(1)).thenReturn(employee);
         ResponseEntity<EmployeeDto> response = employeeController.displayEmployeeById(1);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
-    void testUpdateEmployee() {
-        EmployeeDto employeeDto = new EmployeeDto();
-        Employee employee = new Employee();
-        when(employeeService.getEmployeeById(anyInt())).thenReturn(employee);
+    void testDisplayEmployeesByIdFailure() {
+        when(employeeService.getEmployeeById(1)).thenReturn(null);
+        assertThrows(NoSuchElementException.class, () -> employeeController.displayEmployeeById(1));
+    }
+
+    @Test
+    void testUpdateEmployeeSuccess() {
+        when(employeeService.getEmployeeById(1)).thenReturn(employee);
         when(employeeService.addEmployee(any(Employee.class))).thenReturn(employee);
         ResponseEntity<EmployeeDto> response = employeeController.updateEmployee(1, employeeDto);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
+    void testUpdateEmployeeFailure() {
+        when(employeeService.getEmployeeById(1)).thenReturn(null);
+        assertThrows(NoSuchElementException.class, () -> employeeController.updateEmployee(1, employeeDto));
+    }
+    @Test
     void testDeleteEmployee() {
-        Employee employee = new Employee();
-        when(employeeService.getEmployeeById(anyInt())).thenReturn(employee);
+        when(employeeService.getEmployeeById(1)).thenReturn(employee);
         when(employeeService.addEmployee(any(Employee.class))).thenReturn(employee);
-        ResponseEntity<EmployeeDto> response = employeeController.deleteEmployee(1);
+        ResponseEntity<EmployeeDto> response = employeeController.deleteEmployee(employeeDto.getEmployeeId());
         assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void testDeleteEmployeeFailure() {
+        when(employeeService.getEmployeeById(1)).thenReturn(null);
+        assertThrows(NoSuchElementException.class, () -> employeeController.deleteEmployee(employeeDto.getEmployeeId()));
     }
 
     @Test
     void testAddCertificateToEmployee() {
-        Certificate certificate = new Certificate();
-        Employee employee = new Employee();
-        when(certificateService.getCertificateById(anyInt())).thenReturn(certificate);
-        when(employeeService.getEmployeeById(anyInt())).thenReturn(employee);
+        Certificate newCertificate = Certificate.builder().certificateId(5).certificateName("android").build();
+        when(certificateService.getCertificateById(newCertificate.getCertificateId())).thenReturn(certificate);
+        when(employeeService.getEmployeeById(1)).thenReturn(employee);
         when(employeeService.addEmployee(any(Employee.class))).thenReturn(employee);
-        ResponseEntity<EmployeeDto> response = employeeController.addCertificateToEmployee(1, 1);
+        ResponseEntity<EmployeeDto> response = employeeController.addCertificateToEmployee(1, newCertificate.getCertificateId());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
+    void testAddCertificateToEmployeeFailure() {
+        when(certificateService.getCertificateById(employeeDto.getCertificateId())).thenReturn(null);
+        assertThrows(NoSuchElementException.class,() -> employeeController.addCertificateToEmployee(employeeDto.getEmployeeId(), employeeDto.getCertificateId()));
+        when(employeeService.getEmployeeById(employeeDto.getEmployeeId())).thenReturn(null);
+        assertThrows(NoSuchElementException.class, () -> employeeController.addCertificateToEmployee(employeeDto.getEmployeeId(), employeeDto.getCertificateId()));
+        when(employeeService.addEmployee(employee)).thenReturn(null);
+        assertThrows(NoSuchElementException.class,() -> employeeController.addCertificateToEmployee(employeeDto.getEmployeeId(), employeeDto.getCertificateId()));
+
+
+    }
+    @Test
     void testDisplayCertificatesByEmployeeId() {
-        Employee employee = new Employee();
-        Set<Certificate> certificates = new HashSet<>();
-        certificates.add(new Certificate());
-        employee.setCertificates(certificates);
         when(employeeService.getEmployeeById(anyInt())).thenReturn(employee);
         ResponseEntity<Set<CertificateDto>> response = employeeController.displayCertificatesByEmployeeId(1);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertFalse(response.getBody().isEmpty());
+    }
+
+    @Test
+    void testDisplayCertificatesByEmployeeIdFailure() {
+        when(employeeService.getEmployeeById(employeeDto.getEmployeeId())).thenReturn(null);
+        assertThrows(NoSuchElementException.class, () -> employeeController.displayCertificatesByEmployeeId(employeeDto.getEmployeeId()));
     }
 }

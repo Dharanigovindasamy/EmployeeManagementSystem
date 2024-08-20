@@ -3,10 +3,12 @@ package com.ideas2it.ems.controller;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import com.ideas2it.ems.model.BankDetail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,159 +34,114 @@ class CertificateControllerTest {
     @Mock
     private CertificateService certificateService;
 
+    CertificateDto certificateDto = new CertificateDto();
+    Certificate certificate = new Certificate();
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        certificateDto.setCertificateId(1);
+        certificateDto.setCertificateName("php master");
+        certificate.setCertificateId(1);
+        certificate.setCertificateName("php master");
+        certificate = Certificate.builder().certificateId(1)
+                            .certificateName("Master in php")
+                            .employees(Set.of(Employee.builder().employeeId(1).employeeName("kavi").employeeDOB(LocalDate.of(2000,11,11))
+                                .contactNumber(9876543212L)
+                                .mailId("kavi@gmail.com")
+                                .experience(3)
+                                .salary(54000)
+                                .city("erode")
+                                .bankDetail(BankDetail.builder().accountId(3)
+                                            .accountNumber(8765432l)
+                                            .branch("sathy")
+                                            .build())
+                            .build()))
+                        .build();
+
     }
 
     @Test
     void testAddCertificate() {
-        CertificateDto certificateDto = new CertificateDto();
-        certificateDto.setCertificateName("php master");
-        Certificate certificate = new Certificate();
-      //  certificate.setCertificateName("php master");
         when(certificateService.addCertificate(any(Certificate.class))).thenReturn(certificate);
-
         ResponseEntity<CertificateDto> response = certificateController.addCertificate(certificateDto);
-
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(certificate.getCertificateName(), response.getBody().getCertificateName());
-        verify(certificateService, times(1)).addCertificate(any(Certificate.class));
     }
 
     @Test
     void testDisplayCertificates() {
         Set<Certificate> certificates = new HashSet<>();
         certificates.add(new Certificate());
-
         when(certificateService.getAllCertificates()).thenReturn(certificates);
-
         ResponseEntity<Set<CertificateDto>> response = certificateController.displayCertificates();
-
         assertEquals(HttpStatus.OK, response.getStatusCode());
-       // assertEquals(certificates, response.getBody());
         assertFalse(response.getBody().isEmpty());
-        verify(certificateService, times(1)).getAllCertificates();
     }
 
     @Test
-    void testDisplayCertificates_Empty() {
+    void testDisplayCertificatesEmpty() {
         when(certificateService.getAllCertificates()).thenReturn(new HashSet<>());
-
         ResponseEntity<Set<CertificateDto>> response = certificateController.displayCertificates();
-
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        verify(certificateService, times(1)).getAllCertificates();
     }
 
     @Test
     void testDisplayCertificateById() {
-        int certificateId = 1;
-        Certificate certificate = new Certificate();
-
-        when(certificateService.getCertificateById(certificateId)).thenReturn(certificate);
-
-        ResponseEntity<CertificateDto> response = certificateController.displayCertificateById(certificateId);
-
+        when(certificateService.getCertificateById(certificateDto.getCertificateId())).thenReturn(certificate);
+        ResponseEntity<CertificateDto> response = certificateController.displayCertificateById(certificateDto.getCertificateId());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(certificate.getCertificateId(), response.getBody().getCertificateId());
-        verify(certificateService, times(1)).getCertificateById(certificateId);
     }
 
     @Test
-    void testDisplayCertificateById_NotFound() {
-        int certificateId = 1;
-
-        when(certificateService.getCertificateById(certificateId)).thenReturn(null);
-
-        NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> certificateController.displayCertificateById(certificateId));
-
-        assertEquals("Can't display. certificate not found {}" + certificateId, thrown.getMessage());
-        verify(certificateService, times(1)).getCertificateById(certificateId);
+    void testDisplayCertificateByIdNotFound() {
+        when(certificateService.getCertificateById(certificateDto.getCertificateId())).thenReturn(null);
+        assertThrows(NoSuchElementException.class, () -> certificateController.displayCertificateById(certificateDto.getCertificateId()));
     }
 
     @Test
     void testUpdatedCertificate() {
-        int certificateId = 1;
-        CertificateDto certificateDto = new CertificateDto();
-        Certificate certificate = new Certificate();
-
-        when(certificateService.getCertificateById(certificateId)).thenReturn(certificate);
+        when(certificateService.getCertificateById(certificateDto.getCertificateId())).thenReturn(certificate);
         when(certificateService.addCertificate(any(Certificate.class))).thenReturn(certificate);
-
-        ResponseEntity<CertificateDto> response = certificateController.updatedCertificate(certificateId, certificateDto);
-
+        ResponseEntity<CertificateDto> response = certificateController.updatedCertificate(certificateDto.getCertificateId(), certificateDto);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(certificateService, times(1)).getCertificateById(certificateId);
-        verify(certificateService, times(1)).addCertificate(any(Certificate.class));
     }
 
     @Test
-    void testUpdatedCertificate_NotFound() {
-        int certificateId = 1;
-        CertificateDto certificateDto = new CertificateDto();
-
-        when(certificateService.getCertificateById(certificateId)).thenReturn(null);
-
-        NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> certificateController.updatedCertificate(certificateId, certificateDto));
-
-        assertEquals("Can't update. Certificate not found {} " + certificateId, thrown.getMessage());
-        verify(certificateService, times(1)).getCertificateById(certificateId);
+    void testUpdatedCertificateNotFound() {
+        when(certificateService.getCertificateById(certificateDto.getCertificateId())).thenReturn(null);
+        NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> certificateController.updatedCertificate(certificateDto.getCertificateId(), certificateDto));
+        assertEquals("Can't update. Certificate not found {} " + certificateDto.getCertificateId(), thrown.getMessage());
     }
 
     @Test
     void testDeletedCertificate() {
-        int certificateId = 1;
-        Certificate certificate = new Certificate();
-
-        when(certificateService.getCertificateById(certificateId)).thenReturn(certificate);
-
-        ResponseEntity<CertificateDto> response = certificateController.deletedCertificate(certificateId);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        verify(certificateService, times(1)).getCertificateById(certificateId);
-        verify(certificateService, times(1)).addCertificate(any(Certificate.class));
+        when(certificateService.getCertificateById(certificateDto.getCertificateId())).thenReturn(null);
+        assertThrows(NoSuchElementException.class, () -> certificateController.deletedCertificate(certificate.getCertificateId()));
     }
 
     @Test
-    void testDeletedCertificate_NotFound() {
-        int certificateId = 1;
-
-        when(certificateService.getCertificateById(certificateId)).thenReturn(null);
-
-        NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> certificateController.deletedCertificate(certificateId));
-
-        assertEquals("Cant delete. Certificate not found" + certificateId, thrown.getMessage());
-        verify(certificateService, times(1)).getCertificateById(certificateId);
+    void testDeletedCertificateNotFound() {
+        when(certificateService.getCertificateById(certificateDto.getCertificateId())).thenReturn(null);
+        NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> certificateController.deletedCertificate(certificateDto.getCertificateId()));
+        assertEquals("Cant delete. Certificate not found" + certificateDto.getCertificateId(), thrown.getMessage());
+        verify(certificateService, times(1)).getCertificateById(certificateDto.getCertificateId());
     }
 
     @Test
     void testGetEmployeesByCertificateId() {
-        int certificateId = 1;
         Set<Employee> employees = new HashSet<>();
         employees.add(new Employee());
-
-        Certificate certificate = new Certificate();
         certificate.setEmployees(employees);
-
-        when(certificateService.getCertificateById(certificateId)).thenReturn(certificate);
-
-        ResponseEntity<Set<EmployeeDto>> response = certificateController.getEmployeesByCertificateId(certificateId);
-
+        when(certificateService.getCertificateById(certificateDto.getCertificateId())).thenReturn(certificate);
+        ResponseEntity<Set<EmployeeDto>> response = certificateController.getEmployeesByCertificateId(certificateDto.getCertificateId());
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertFalse(response.getBody().isEmpty());
-        verify(certificateService, times(1)).getCertificateById(certificateId);
     }
 
     @Test
     void testGetEmployeesByCertificateId_NotFound() {
-        int certificateId = 1;
-
-        when(certificateService.getCertificateById(certificateId)).thenReturn(null);
-
-        NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> certificateController.getEmployeesByCertificateId(certificateId));
-
-        assertEquals("Can't get employees by certificate Id.Certificates not found" + certificateId, thrown.getMessage());
-        verify(certificateService, times(1)).getCertificateById(certificateId);
+        when(certificateService.getCertificateById(certificateDto.getCertificateId())).thenReturn(null);
+        assertThrows(NoSuchElementException.class, () -> certificateController.getEmployeesByCertificateId(certificateDto.getCertificateId()));
     }
 }

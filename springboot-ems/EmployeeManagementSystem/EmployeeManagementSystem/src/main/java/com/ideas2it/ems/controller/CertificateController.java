@@ -141,7 +141,6 @@ public class CertificateController {
             logger.warn("Certificate not found {}", certificateId);
             throw new NoSuchElementException("Cant delete. Certificate not found" + certificateId);
         }
-        //certificate = certificateService.addCertificate(certificate);
         certificate.setRemoved(true);
         Certificate deletedCertificate = certificateService.addCertificate(certificate);
         logger.info("certificate deleted successfully {}", certificateId);

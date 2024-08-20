@@ -104,13 +104,17 @@ public class EmployeeController {
     /** 
     * <p>Display employee details By employee Id
      * @param employeeId - Id of the employee
-     * @return employeeDto -
+     * @return employeeDto - employeeDto of the respected employee Id
     * </p>
     *
     */
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeDto> displayEmployeeById(@PathVariable("id") int employeeId) {
         EmployeeDto employeeDto = convertEntityToDto(employeeService.getEmployeeById(employeeId));
+        if (null == employeeDto) {
+            logger.error("Employee not found {}", employeeId);
+            throw new NoSuchElementException("Can't display. Employee not found" + employeeId);
+        }
         return new ResponseEntity<>(employeeDto, HttpStatus.OK);
     }
 

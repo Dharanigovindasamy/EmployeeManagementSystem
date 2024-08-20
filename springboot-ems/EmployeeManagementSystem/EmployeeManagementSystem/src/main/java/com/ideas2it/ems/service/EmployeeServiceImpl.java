@@ -43,10 +43,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee getEmployeeById(int employeeId)  {
         Employee employee = employeeDao.findByEmployeeIdAndIsRemovedFalse(employeeId);
-        if (null == employee) {
-            logger.error("Employee not found {}", employeeId);
-            throw new NoSuchElementException("Can't display. Employee not found" + employeeId);
-        }
         return employee;
     }
 }

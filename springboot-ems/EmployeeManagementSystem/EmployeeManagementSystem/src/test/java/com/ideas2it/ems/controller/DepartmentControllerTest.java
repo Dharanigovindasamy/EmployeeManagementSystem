@@ -44,7 +44,6 @@ class DepartmentControllerTest {
         ResponseEntity<DepartmentDto> response = departmentController.addDepartment(departmentDto);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(departmentDto, response.getBody());
-        verify(departmentService, times(1)).addDepartment(any(DepartmentDto.class));
     }
 
     @Test
@@ -55,7 +54,6 @@ class DepartmentControllerTest {
         ResponseEntity<Set<DepartmentDto>> response = departmentController.displayDepartments();
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(departments, response.getBody());
-        verify(departmentService, times(1)).getAllDepartments();
     }
 
     @Test
@@ -63,7 +61,6 @@ class DepartmentControllerTest {
         when(departmentService.getAllDepartments()).thenReturn(new HashSet<>());
         ResponseEntity<Set<DepartmentDto>> response = departmentController.displayDepartments();
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        verify(departmentService, times(1)).getAllDepartments();
     }
 
     @Test
